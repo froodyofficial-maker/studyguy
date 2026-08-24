@@ -1,99 +1,1048 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GamerGuy — Find Your Horror Game</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="noise"></div>
-<header class="nav">
-  <a class="brand" href="#"><span class="brand-mark">G</span><span>Gamer<span>Guy</span></span></a>
-  <nav><a href="#discover">Discover</a><a href="#games">Games</a><a href="#how">How it works</a></nav>
-  <button class="nav-search" id="knownSearch">⌕ Search a game</button>
-</header>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GamerGuy — Steam Game Discovery</title>
+<style>
+:root{--bg:#07090e;--p:#10141c;--p2:#151a24;--line:#272e3b;--txt:#f5f7fb;--muted:#8d97aa;--a:#7d5cff;--g:#48e0a0;--y:#ffd166;--r:#ff5d73;--rad:18px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% -10%,#261c55 0,transparent 32%),radial-gradient(circle at -10% 30%,#0e3328 0,transparent 28%),var(--bg);color:var(--txt);font:14px Inter,system-ui,Segoe UI,Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{position:sticky;top:0;height:100vh;padding:20px 15px;border-right:1px solid var(--line);background:#080b10d9;backdrop-filter:blur(18px)}.logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:900;padding:8px 10px 24px}.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--a),#a58fff);display:grid;place-items:center;box-shadow:0 12px 32px #7d5cff44}.nav{display:grid;gap:7px}.nav button,.mobile button{border:0;background:transparent;color:var(--muted);padding:12px;border-radius:12px;text-align:left;transition:.2s}.nav button:hover,.nav button.on{background:#171c26;color:var(--txt);transform:translateX(2px)}.nav button.on{box-shadow:inset 3px 0 var(--a)}.ico{width:18px;height:18px;vertical-align:middle;margin-right:10px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.sidefoot{position:absolute;bottom:18px;left:15px;right:15px;padding:12px;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:11px}.top{height:70px;position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:0 26px;border-bottom:1px solid #272e3b99;background:#080b10c9;backdrop-filter:blur(18px)}.search{position:relative;flex:1;max-width:760px}.search input{width:100%;padding:13px 45px;border-radius:14px;border:1px solid var(--line);background:#111620;color:var(--txt);outline:0}.search input:focus{border-color:#5c4ba0;box-shadow:0 0 0 4px #7d5cff18}.search .ico{position:absolute;left:14px;top:12px;color:#778196}.kbd{position:absolute;right:10px;top:9px;border:1px solid var(--line);padding:3px 7px;border-radius:7px;color:#687286;font-size:11px}.topbtn{width:40px;height:40px;border:1px solid var(--line);border-radius:11px;background:#111620;color:var(--muted)}.main{min-width:0}.wrap{max-width:1500px;margin:auto;padding:28px 30px 70px}.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:24px;padding:34px;min-height:310px;background:linear-gradient(120deg,#151a29,#0f1219 55%,#1a132c);box-shadow:0 24px 70px #0007}.hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-140px;top:-160px;background:#7d5cff33;filter:blur(15px);animation:orb 8s ease-in-out infinite alternate}@keyframes orb{to{transform:translate(-40px,50px) scale(1.1)}}.hero>*{position:relative;z-index:1}.eyebrow{color:#b5a8ff;font-weight:800;font-size:11px;letter-spacing:1.6px;text-transform:uppercase}.hero h1{font-size:clamp(36px,5vw,62px);line-height:.98;letter-spacing:-3px;margin:15px 0}.hero p{max-width:650px;color:#aeb7c8;font-size:16px}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#171c26;color:var(--txt);padding:10px 14px;border-radius:12px;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#444c5b}.primary{background:linear-gradient(135deg,var(--a),#6546e8);border:0;box-shadow:0 10px 30px #7d5cff33}.green{color:#7df0bc;border-color:#285240;background:#10221b}.section{margin-top:32px}.head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}.head h2{margin:0;font-size:21px}.head p{margin:4px 0 0;color:var(--muted)}.status{color:var(--muted);font-size:12px}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#596174;margin-right:6px}.status.ok i{background:var(--g);box-shadow:0 0 12px #48e0a088}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#10141b;color:#aeb7c7}.chip:hover,.chip.on{color:var(--txt);border-color:#5c4ba0;background:#17132b}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}.card{overflow:hidden;background:linear-gradient(180deg,#111620,#0d1016);border:1px solid var(--line);border-radius:17px;transition:.25s}.card:hover{transform:translateY(-5px);border-color:#3b4453;box-shadow:0 20px 40px #0007}.cover{aspect-ratio:460/215;position:relative;background:#171b23;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s}.card:hover img{transform:scale(1.04)}.rank,.save{position:absolute;top:9px;background:#05070bd9;border:1px solid #ffffff18}.rank{left:9px;padding:5px 8px;border-radius:8px;font-weight:900;font-size:11px}.save{right:9px;width:34px;height:34px;border-radius:10px;color:#dce2ed}.save.saved{color:var(--y)}.body{padding:13px}.title{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;color:var(--muted);font-size:11px}.tag{border:1px solid #2a313e;padding:3px 7px;border-radius:6px}.tag.sale{color:#7ef0bd;border-color:#285240}.price{margin-top:10px;font-weight:900}.old{text-decoration:line-through;color:#626c7f;font-weight:500;margin-left:6px;font-size:11px}.cardactions{display:flex;gap:7px;margin-top:11px}.cardactions .btn{flex:1;padding:8px;font-size:12px}.empty{padding:28px;border:1px dashed #333b49;border-radius:16px;text-align:center;color:var(--muted)}.bar{display:flex;justify-content:space-between;align-items:center;margin:20px 0 13px;color:var(--muted)}.overlay{position:fixed;inset:0;z-index:50;background:#000b;backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:.2s}.overlay.open{opacity:1;pointer-events:auto}.drawer{position:absolute;right:0;top:0;width:min(720px,96vw);height:100%;overflow:auto;background:#0b0f15;border-left:1px solid var(--line);transform:translateX(100%);transition:.35s}.overlay.open .drawer{transform:none}.close{position:absolute;right:17px;top:17px;z-index:3}.detailhero{height:300px;position:relative;overflow:hidden}.detailhero img{width:100%;height:100%;object-fit:cover;filter:brightness(.55)}.detailhero:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 25%,#0b0f15 94%)}.detail{position:relative;margin-top:-55px;padding:0 24px 30px;z-index:2}.detail h2{font-size:32px;letter-spacing:-1.3px;margin:0 0 4px}.muted{color:var(--muted)}.features{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}.feature{border:1px solid #2a323f;border-radius:9px;padding:7px 9px;font-size:12px;color:#bfc7d5}.feature.sale{color:#ffd66b;border-color:#5d4c23}.feature.good{color:#7df0bc;border-color:#285240}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0}.stat{padding:12px;border:1px solid var(--line);border-radius:12px;background:#111620}.stat b{display:block}.stat small{color:var(--muted)}.modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:#000b;opacity:0;pointer-events:none;transition:.2s}.modal.open{opacity:1;pointer-events:auto}.box{width:min(600px,94vw);background:#0e1219;border:1px solid var(--line);border-radius:20px;padding:21px}.listrow{width:100%;display:flex;align-items:center;gap:10px;background:#111620;color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:11px;margin-top:8px;text-align:left}.grow{flex:1;min-width:0}.toast{position:fixed;right:20px;bottom:20px;z-index:100;background:#131923;border:1px solid #303847;border-radius:12px;padding:12px 15px;opacity:0;transform:translateY(15px);transition:.2s}.toast.show{opacity:1;transform:none}.mobile{display:none}
+@media(max-width:850px){.app{grid-template-columns:1fr}.side{display:none}.mobile{display:flex;position:fixed;bottom:10px;left:10px;right:10px;z-index:30;justify-content:space-around;background:#10141deF;border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(18px)}.top{padding:0 13px}.wrap{padding:20px 14px 90px}.hero{padding:26px}.hero h1{letter-spacing:-2px}.kbd{display:none}.grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
 
-<main>
-<section class="hero" id="discover">
-  <div class="hero-glow"></div>
-  <div class="hero-copy">
-    <div class="eyebrow">HORROR GAME DISCOVERY</div>
-    <h1>Find the horror<br><em>you actually want.</em></h1>
-    <p>Tell GamerGuy what scares you. We'll match your taste with horror games worth playing.</p>
-    <div class="hero-actions">
-      <button class="primary" id="findBtn">Find my game <span>→</span></button>
-      <button class="secondary" id="knownSearch2">I know a game</button>
-    </div>
-  </div>
-  <div class="hero-card">
-    <div class="mini-label">GAMERGUY MATCH</div>
-    <div class="match-ring"><strong>94</strong><span>%</span></div>
-    <h3>Alien: Isolation</h3>
-    <p>Heavy atmosphere · Survival · Psychological</p>
-    <div class="bar"><i style="width:94%"></i></div>
-    <small>Based on your preferences</small>
-  </div>
-</section>
+/* GamerGuy v3 feature styling */
+.filterbar{display:flex;justify-content:space-between;align-items:center;margin:14px 0 9px}
+.filterhint{color:var(--muted);font-size:12px;margin-left:8px}
+.searchtools{padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:#0d1118}
+.queryline{min-height:22px;color:var(--muted);font-size:12px}
+.querypill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid #3b315f;background:#17132a;border-radius:9px;color:#ddd7ff}
+.querypill button{border:0;background:transparent;color:inherit;padding:0;display:grid;place-items:center}
+.querypill .ico{margin:0;width:13px;height:13px}
+.compact{align-items:center}
+.top10box{margin-top:24px}
+.quiet{border:0;background:transparent;color:#687286;padding:7px 0 0;font-size:11px;display:flex;align-items:center;gap:5px}
+.quiet:hover{color:#aeb7c7}
+.quiet .ico{margin:0;width:14px;height:14px}
+.personal{display:flex;align-items:center;gap:4px;color:#9c91db;font-size:11px;margin-top:7px}
+.personal .ico{margin:0;width:13px;height:13px}
+.settinggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.setting{position:relative;padding:15px;border:1px solid var(--line);border-radius:14px;background:#10151e}
+.setting b{display:block;margin-bottom:4px}
+.setting span{color:var(--muted);font-size:12px;padding-right:50px;display:block}
+.switch{position:absolute;right:14px;top:17px;width:42px;height:24px}
+.switch input{display:none}
+.switch span{display:block;width:42px;height:24px;border-radius:999px;background:#252c38;transition:.2s}
+.switch span:after{content:"";display:block;width:18px;height:18px;margin:3px;border-radius:50%;background:#9098a8;transition:.2s}
+.switch input:checked+span{background:#4b3aa2}
+.switch input:checked+span:after{transform:translateX(18px);background:#fff}
+.settings{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{padding:19px;border:1px solid var(--line);border-radius:17px;background:#0e131b}
+.panel h3{margin:0 0 6px}
+.panel>label{display:block;margin:18px 0 8px;font-weight:800;font-size:12px;color:#cbd2de}
+.smallchips{max-height:180px;overflow:auto;padding-right:3px}
+.dangerchip.on{border-color:#713447;background:#27141c}
+.settingrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid #202632;color:#cbd2de}
+.settingrow:last-child{border-bottom:0}
+.num{width:100px;padding:9px;border-radius:9px;border:1px solid var(--line);background:#111620;color:var(--txt)}
+.checks{display:grid;gap:9px;margin-top:15px;color:#aeb7c7;font-size:13px}
+.checks input{accent-color:#7d5cff}
+.loadingdetail{padding:70px 25px;color:var(--muted);text-align:center}
+.analysis{margin:18px 0;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0e131b}
+.analysis h3,.reviews h3,.personalrate h3{margin:0 0 10px}
+.analysisline{display:flex;gap:8px;align-items:flex-start;color:#bfc7d5;padding:7px 0}
+.analysisline .ico{color:#68dca7;width:16px;height:16px;margin:0;flex:none}
+.reviews{margin:20px 0}
+.review{padding:12px 0;border-top:1px solid #202632}
+.reviewtop{display:flex;justify-content:space-between;gap:12px;font-size:12px}
+.reviewtop b{color:#7ee9b8}
+.reviewtop span{color:var(--muted)}
+.review p{margin:7px 0 0;color:#aeb7c7;line-height:1.5}
+.personalrate{padding:16px;border:1px solid var(--line);border-radius:14px;margin:18px 0}
+.stars{display:flex;gap:5px}
+.rate{border:0;background:transparent;color:#4a5364;padding:4px}
+.rate .ico{margin:0;width:24px;height:24px}
+.rate.on{color:#ffd166}
+.btn .ico{margin:0 7px 0 0;width:15px;height:15px}
+.topbtn .ico{margin:0;width:18px;height:18px}
+.nav button .ico,.mobile button .ico{margin:0 9px 0 0;width:16px;height:16px}
+.mobile button .ico{margin:0;width:19px;height:19px}
+.save .ico{margin:0;width:17px;height:17px}
+.meta:empty{display:none}
+@media(max-width:900px){.settings{grid-template-columns:1fr}.settinggrid{grid-template-columns:1fr}}
+@media(max-width:650px){.settinggrid{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cardactions{flex-direction:column}.cardactions .btn{width:100%}.hero{min-height:0}.detailhero{height:240px}}
 
-<section class="section" id="games">
-  <div class="section-head"><div><div class="eyebrow">EXPLORE</div><h2>Horror, your way.</h2></div><button class="text-btn" id="knownSearch3">Search all games →</button></div>
-  <div class="game-grid" id="featured"></div>
-</section>
+/* v4 — cleaner cards, full game pages, score system */
+.gamecard{cursor:pointer;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#0e131b;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.gamecard:hover{transform:translateY(-5px);border-color:#4a5365;box-shadow:0 18px 45px #0008}
+.gameposter{aspect-ratio:2/3;position:relative;background:#111722;overflow:hidden}
+.gameposter img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.gamecard:hover .gameposter img{transform:none}
+.posterfade{position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#080b10)}
+.gamecardinfo{padding:12px 13px 14px}
+.gametitle{font-weight:900;font-size:15px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gameprice{margin-top:7px;color:#cbd2de;font-weight:800}
+.gameprice .old{margin-left:8px;color:#687286;text-decoration:line-through;font-weight:600}
+.scoreline{display:flex;align-items:center;gap:7px;margin-top:8px;color:#8f9aac;font-size:11px}
+.score-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px #ffffff08}
+.dot-purple{background:#a66cff;box-shadow:0 0 14px #a66cff88}
+.dot-green{background:#48e0a0}
+.dot-yellow{background:#ffd166}
+.dot-red{background:#ff5d73}
+.dot-gray{background:#596274}
+.gamepage{animation:pagein .25s ease}
+@keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.gamepagehero{position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#0d1118;min-height:300px}
+.gamepagehero img{width:100%;height:390px;object-fit:cover;display:block}
+.gamepagehero:after{content:"";position:absolute;inset:25% 0 0;background:linear-gradient(transparent,#0d1118)}
+.gamepagehead{position:relative;margin-top:-130px;padding:0 30px 25px;z-index:2}
+.backbtn{margin-bottom:16px}
+.gamepagehead h1{font-size:42px;line-height:1.05;margin:0 0 10px;max-width:850px}
+.scorebadge{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #343c4c;border-radius:999px;background:#0b0f16dd;color:#fff;font-weight:900}
+.scorebadge .score-dot{width:11px;height:11px}
+.scorelabel{color:#aeb7c7;font-weight:700}
+.detailgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr);gap:16px;margin-top:16px}
+.detailpanel{border:1px solid var(--line);border-radius:18px;background:#0e131b;padding:19px}
+.detailpanel h2{margin:0 0 12px}
+.metricgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{padding:13px;border-radius:13px;background:#111722;border:1px solid #222a38}
+.metric b{display:block;font-size:19px}
+.metric small{display:block;color:var(--muted);margin-top:3px}
+.genrechips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.genrechip{padding:6px 9px;border-radius:999px;background:#151b25;border:1px solid #2a3240;color:#aeb7c7;font-size:11px}
+.gameactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.reviewbar{height:8px;border-radius:99px;background:#252b36;overflow:hidden;margin:12px 0}
+.reviewbar>span{display:block;height:100%;background:#48e0a0}
+.reviewcount{color:#8f9aac;font-size:12px}
+.optionstack{display:grid;gap:8px}
+.optionstack .btn{justify-content:flex-start}
+.filterrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:13px}
+.filterrow select,.filterrow input{background:#111722;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.freecheck{display:flex;align-items:center;gap:8px;color:#b8c0ce;font-size:12px}
+.noresults{grid-column:1/-1}
+@media(max-width:850px){.detailgrid{grid-template-columns:1fr}.metricgrid{grid-template-columns:repeat(2,1fr)}.gamepagehead h1{font-size:32px}.gamepagehero img{height:300px}}
+@media(max-width:600px){.gameposter{aspect-ratio:2/3}.gamepagehead{padding:0 16px 20px}.gamepagehero img{height:250px}.metricgrid{grid-template-columns:repeat(2,1fr)}}
+.scorepending{color:#737d90}.scoreline strong{color:#d7dce5}\n
+/* v6 */
+.gamegallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.gamegallery a{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:12px;border:1px solid #252d3a;background:#111722}.gamegallery img{width:100%;height:100%;object-fit:cover;display:block;transition:.25s}.gamegallery a:hover img{transform:scale(1.04)}.longdesc{color:#c2cad7;line-height:1.75;font-size:14px}.analysisgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.analysiscard{padding:14px;border:1px solid #242c39;border-radius:13px;background:#111722}.analysiscard b{display:block;margin-bottom:5px}.analysiscard span{color:#aeb7c7;line-height:1.5}.verdictbox{padding:16px;border:1px solid #343b49;border-radius:15px;background:linear-gradient(135deg,#121722,#0d1118)}.verdictbox h3{margin:0 0 8px}.recnote{margin-top:8px;color:#8f9aac;font-size:11px}
+.gameposter{position:relative}.imagefallback{position:absolute;inset:0;display:grid;place-items:center;color:#5f6a7e;font-size:12px;background:linear-gradient(135deg,#151a24,#0a0d13);text-align:center;padding:10px}.gamepagehero img{background:#10151e}\n.gameposter img{background:linear-gradient(135deg,#141a25,#0b0f16);min-height:100%;object-fit:cover}.imagefallback{position:absolute;inset:0;display:grid;place-items:center;color:#647087;background:linear-gradient(135deg,#151b26,#090c12);font-size:12px}\n.gamecard{cursor:pointer}.gameposter{position:relative;overflow:hidden}.gameposter img{display:block;width:100%;height:100%;object-fit:cover;min-height:100%;background:#0b0f16}.imagefallback{position:absolute;inset:0;display:grid;place-items:center;color:#6b7587;background:linear-gradient(135deg,#151a24,#090c12);font-size:12px}\n.gamecard{display:block;color:inherit;text-decoration:none}.gamecard:focus-visible{outline:2px solid #8c74ff;outline-offset:3px}.gameposter{min-height:190px}.gameposter img{display:block;width:100%;height:100%;object-fit:cover}.save{position:absolute;z-index:5;width:38px;height:38px;display:grid;place-items:center;padding:0;border:0;background:#080b10cc;border-radius:12px;color:inherit}\n.gamecard,.gameposter{contain:layout paint}.gameposter{aspect-ratio:460/215;min-height:0}.gameposter img{display:block;width:100%;height:100%;object-fit:cover;transition:none!important}.imagefallback{position:absolute;inset:0;display:grid;place-items:center;color:#758197;background:#0c1119;font-size:12px}.rec-loading{min-height:180px;border:1px solid var(--line);border-radius:18px;background:#0e131b;display:flex;align-items:center;justify-content:center;gap:12px;color:#8f99ab}.spinner{width:20px;height:20px;border:2px solid #303747;border-top-color:#8a70ff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}\n.bigscore{font-size:34px;letter-spacing:-1px;line-height:1}.bigscore small{font-size:15px;color:#8f99ab;margin-left:2px}.scorebadge{display:flex;align-items:center;gap:8px}\n.game-score-panel{margin-top:18px;display:grid;grid-template-columns:minmax(240px,1.1fr) 1fr;gap:14px}.score-overview,.spec-panel{padding:18px;border:1px solid var(--line);border-radius:16px;background:#0e131b}.score-overview{display:flex;align-items:center;gap:18px}.bigscoreblock{min-width:150px}.bigscore{font-size:48px;line-height:1;font-weight:950;letter-spacing:-2px}.bigscore small{font-size:18px;color:#8f99ab;letter-spacing:0}.score-caption{margin-top:7px;color:#8f99ab;font-size:12px}.score-details{display:grid;gap:7px}.score-detail{display:flex;justify-content:space-between;gap:12px;color:#aeb7c7;font-size:12px}.score-detail b{color:#e6e9ef}.spec-panel h3{margin:0 0 10px}.spec-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px}.spec-list{color:#c3cad6;font-size:12px;line-height:1.6}.spec-list h4{margin:0 0 6px;color:#eef1f6;font-size:12px}.compat-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:9px;margin-top:10px;font-weight:800;font-size:12px}.compat-pill.ok{background:#103328;color:#73e6b0}.compat-pill.bad{background:#35151d;color:#ff7a8d}.compat-pill.unknown{background:#222b38;color:#aeb7c7}.description-panel{margin-top:14px;padding:20px;border:1px solid var(--line);border-radius:16px;background:#0e131b}.description-panel h2{margin:0 0 10px}.longdesc{white-space:pre-line}.gamepagehero{border-radius:22px;overflow:hidden}.gamepagehero img{display:block;width:100%;height:auto;max-height:430px;object-fit:cover}@media(max-width:900px){.game-score-panel{grid-template-columns:1fr}.spec-columns{grid-template-columns:1fr}}\n.description-panel+.description-panel{margin-top:14px}.score-detail b{max-width:60%;text-align:right}.score-overview .score-details{width:100%}\n</style></head><body>
+<div class="app"><aside class="side"><div class="logo"><div class="mark"><svg class="ico" viewBox="0 0 24 24"><path d="M7 14l-2 3a2.8 2.8 0 0 0 4.8 2.8l1.4-2h2.6l1.4 2A2.8 2.8 0 0 0 20 17l-2-3"/><path d="M7 14a5 5 0 0 1 10 0M8 10V7m-1.5 1.5h3M15.5 9.5h.01M18 8h.01"/></svg></div>GamerGuy</div><nav class="nav">
+<button class="on" data-page="home"><svg class="ico" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/></svg>Home</button>
+<button data-page="discover"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m15 9-2 4-4 2 2-4z"/></svg>Discover</button>
+<button data-page="lists"><svg class="ico" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></svg>My Lists</button>
+<button data-page="wishlist"><svg class="ico" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/></svg>Wishlist</button>
+<button data-page="alerts"><svg class="ico" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>Alerts</button>
+<button data-page="settings"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 15.5 21 17l-2 2-2-2M5 8.5 3 7l2-2 2 2M8.5 5 7 3l2-2 2 2M15.5 19 17 21l-2 2-2-2"/></svg>Settings</button>
+</nav><div class="sidefoot"><span id="status">Connecting to Steam…</span><br><br>Recommendations, hidden games, ratings and preferences are stored in this browser.</div></aside>
+<main class="main"><header class="top"><div class="search"><svg class="ico"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg><input id="q" placeholder="Search every Steam game…"><span class="kbd">CTRL K</span></div><button class="topbtn" id="bell" title="Alerts"><svg class="ico" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></button><button class="topbtn" id="my" title="My lists"><svg class="ico" viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></svg></button></header><div class="wrap" id="view"><section class="hero"><div class="eyebrow">GAMER DISCOVERY</div><h1>Find games that fit.</h1><p>Loading GamerGuy…</p><div class="actions"><button class="btn primary" type="button">Search Steam</button><button class="btn" type="button">Discover</button></div></section></div></main></div>
+<nav class="mobile"><button data-page="home">Home</button><button data-page="discover"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="m15 9-2 4-4 2 2-4z"/></svg>Discover</button><button data-page="lists">Lists</button><button data-page="wishlist"><svg class="ico" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/></svg>Wishlist</button><button data-page="settings"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 15.5 21 17l-2 2-2-2M5 8.5 3 7l2-2 2 2M8.5 5 7 3l2-2 2 2M15.5 19 17 21l-2 2-2-2"/></svg>Settings</button></nav>
+<div class="overlay" id="overlay"><div class="drawer"><button class="topbtn close" id="x">Close</button><div id="detail"></div></div></div>
+<div class="modal" id="modal"><div class="box"><div style="display:flex;justify-content:space-between"><h2 style="margin:0">Save game</h2><button class="topbtn" id="mx">Close</button></div><p class="muted">Choose a list or create one.</p><div id="choices"></div><button class="btn primary" style="margin-top:12px" id="new">Create new list</button></div></div><div class="toast" id="toast"></div>
+<script>
+/* GamerGuy v10 boot safety: never leave a blank screen if browser state or a later script fails. */
+(function(){
+  const showBootError=(msg)=>{
+    try{
+      const v=document.getElementById('view');
+      if(v && !v.dataset.ggBootError){
+        v.dataset.ggBootError='1';
+        v.innerHTML=`<section class="hero"><div class="eyebrow">GAMERGUY</div><h1>GamerGuy hit a startup error.</h1><p style="max-width:760px">${String(msg||'Unknown error').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}</p><div class="actions"><button class="btn primary" onclick="try{localStorage.clear();location.reload()}catch(e){location.reload()}">Reset GamerGuy</button></div></section>`;
+      }
+    }catch(e){}
+  };
+  window.addEventListener('error',e=>{ if(e && e.error) showBootError(e.error.message||e.message); });
+  window.addEventListener('unhandledrejection',e=>showBootError(e.reason?.message||String(e.reason||'Unhandled promise rejection')));
+})();
+const EDGE='https://hlcajwtmwgrfolaokmbn.supabase.co/functions/v1/super-processor';
+const STORE='server://appdetails';
+const REVIEWS='server://appreviews';
+const NEWS='https://api.steampowered.com/ISteamNews/GetNewsForApp/v2/';
+const STORE_SEARCH='server://storesearch';
 
-<section class="how" id="how">
-  <div class="eyebrow">HOW IT WORKS</div><h2>Less scrolling.<br>More screaming.</h2>
-  <div class="steps">
-    <div><b>01</b><h3>Pick your tags</h3><p>Choose what you want more — or less — of.</p></div>
-    <div><b>02</b><h3>Get matched</h3><p>GamerGuy scores games against your preferences.</p></div>
-    <div><b>03</b><h3>Play</h3><p>Explore the game, then jump to Steam when you're ready.</p></div>
-  </div>
-</section>
-</main>
+const ICONS={
+search:'<circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/>',
+home:'<path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/>',
+discover:'<circle cx="12" cy="12" r="8"/><path d="m15 9-2 4-4 2 2-4z"/>',
+list:'<path d="M5 6h14M5 12h14M5 18h14"/>',
+bell:'<path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>',
+settings:'<circle cx="12" cy="12" r="3"/><path d="M19 15.5 21 17l-2 2-2-2M5 8.5 3 7l2-2 2 2M8.5 5 7 3l2-2 2 2M15.5 19 17 21l-2 2-2-2"/>',
+eyeoff:'<path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 4.2A10.5 10.5 0 0 1 12 4c5.5 0 9.5 4.9 10 8-.2 1.1-.9 2.2-1.7 3.2M6.2 6.2C4.3 7.5 2.8 9.5 2 12c.5 3.1 4.5 8 10 8 1.5 0 2.8-.3 4-.8"/>',
+check:'<path d="m5 12 4 4L19 6"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+close:'<path d="M6 6l12 12M18 6 6 18"/>',
+star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/>',
+arrow:'<path d="M19 12H5M12 19l-7-7 7-7"/>'
+};
+const ggIcon=n=>`<svg class="ico" viewBox="0 0 24 24">${ICONS[n]||''}</svg>`;
+const $=x=>document.querySelector(x);
+const esc=x=>String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch{return d}};
+const S={
+ page:location.hash.startsWith('#game-')?'game':'home',
+ gameId:location.hash.startsWith('#game-')?Number(location.hash.slice(6)):null,
+ q:'',apps:[],map:new Map(),cursor:0,more:true,loading:false,details:new Map(),reviews:new Map(),reviewSummaries:new Map(),reviewLists:new Map(),
+ viewed:read('ggViewed',[]),wish:read('ggWish',[]),lists:read('ggLists',{}),watch:read('ggWatch',{}),
+ hidden:new Set(read('ggHidden',[])),owned:new Set(read('ggOwned',[])),ratings:read('ggRatings',{}),discountHistory:read('ggDiscountHistory',{}),
+ selectedGenres:read('ggSelectedGenres',[]),filterBusy:false,loadMoreBusy:false,recBusy:false,recs:[],
+ prefs:Object.assign({
+ preferredGenres:[],avoidGenres:[],maxPrice:100,minScore:0,minSteamPositive:0,hideBad:false,
+ preferSingle:false,preferIndie:false,avoidEarly:false,freeOnly:false,
+ notifySale:true,notifyUpdate:true,autoWatchSale:true,autoWatchUpdate:true,
+ region:'IN',currency:'INR',ramGB:16,gpuTier:2,cpuTier:2,useSpecs:true
+ },read('ggPrefs',{}))
+};
+/* Normalize old localStorage from previous GamerGuy versions. */
+(function normalizeState(){
+  const arrKeys=['viewed','wish','selectedGenres'];
+  for(const k of arrKeys) if(!Array.isArray(S[k])) S[k]=[];
+  for(const k of ['preferredGenres','avoidGenres']) if(!Array.isArray(S.prefs[k])) S.prefs[k]=[];
+  for(const k of ['maxPrice','minScore','minSteamPositive']){ const n=Number(S.prefs[k]); S.prefs[k]=Number.isFinite(n)?n:0; }
+  for(const k of ['hideBad','preferSingle','preferIndie','avoidEarly','freeOnly','notifySale','notifyUpdate','autoWatchSale','autoWatchUpdate','useSpecs']) S.prefs[k]=S.prefs[k]===true;
+  if(!S.prefs.region) S.prefs.region='IN';
+})();
+function save(){
+ localStorage.ggViewed=JSON.stringify(S.viewed.slice(-100));
+ localStorage.ggWish=JSON.stringify(S.wish);
+ localStorage.ggLists=JSON.stringify(S.lists);
+ localStorage.ggWatch=JSON.stringify(S.watch);
+ localStorage.ggHidden=JSON.stringify([...S.hidden]);
+ localStorage.ggOwned=JSON.stringify([...S.owned]);
+ localStorage.ggRatings=JSON.stringify(S.ratings);
+ localStorage.ggDiscountHistory=JSON.stringify(S.discountHistory);
+ localStorage.ggSelectedGenres=JSON.stringify(S.selectedGenres);
+ localStorage.ggPrefs=JSON.stringify(S.prefs);
+}
+function toast(t){const e=$('#toast');if(!e)return;e.textContent=t;e.classList.add('show');clearTimeout(window.ggToast);window.ggToast=setTimeout(()=>e.classList.remove('show'),2600)}
+function imageUrl(id){
+  return `${EDGE}?action=image&appid=${encodeURIComponent(id)}&type=header`;
+}
+function cover(id,type='poster'){
+  return imageUrl(id);
+}
+function imageFallbacks(id,type='poster',extra=[]){
+  const n=encodeURIComponent(id);
+  return [
+    imageUrl(id),
+    ...extra,
+    `https://cdn.cloudflare.steamstatic.com/steam/apps/${n}/header.jpg`,
+    `https://cdn.akamai.steamstatic.com/steam/apps/${n}/header.jpg`,
+    `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${n}/header.jpg`,
+    `https://images.weserv.nl/?url=${encodeURIComponent(`https://cdn.cloudflare.steamstatic.com/steam/apps/${n}/header.jpg`)}`
+  ].filter((v,i,arr)=>v&&arr.indexOf(v)===i);
+}
+function fallbackPoster(id){return imageUrl(id)}
+async function jsonFetch(url){
+  const r=await fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}});
+  const text=await r.text();
+  let d=null;
+  try{d=JSON.parse(text)}catch{
+    const start=Math.min(...[text.indexOf('{'),text.indexOf('[')].filter(x=>x>=0));
+    if(start>=0)d=JSON.parse(text.slice(start));
+  }
+  if(!r.ok)throw Error(d?.error||`HTTP ${r.status}`);
+  return d;
+}
+async function edge(action,extra={}){
+ const r=await fetch(EDGE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,last_appid:S.cursor,...extra})});
+ const t=await r.text();let d;try{d=JSON.parse(t)}catch{throw Error(`Backend returned invalid JSON (HTTP ${r.status})`)}
+ if(!r.ok||d.success===false)throw Error(d.error||`Steam processor error (HTTP ${r.status})`);
+ return d;
+}
+function cc(){return S.prefs.region||'IN'}
+async function info(id){
+  const key=`${id}:${cc()}`;
+  if(S.details.has(key))return S.details.get(key);
+  try{
+    const d=await edge('get_details',{appid:Number(id),cc:cc()});
+    if(d?.data){
+      d.data.__id=Number(id);
+      S.details.set(key,d.data);
+      return d.data;
+    }
+  }catch(e){console.warn('Steam details failed',id,e)}
+  return null;
+}
+function detail(id){return S.details.get(`${id}:${cc()}`)}
+function inferredSignals(a,d){
+ const text=[a?.name||'',d?.name||'',d?.short_description||'',d?.about_the_game||'',...(d?.genres||[]).map(x=>x.description)].join(' ').toLowerCase();
+ const out=new Set((d?.genres||[]).map(x=>x.description));
+ const add=(n,terms)=>{if(terms.some(t=>text.includes(t)))out.add(n)};
+ add('Horror',['horror','scary','fright','terrifying','nightmare','haunted','creepy']);
+ add('Survival Horror',['survival horror']); add('Psychological Horror',['psychological horror','psychological','disturbing']);
+ add('Story Rich',['story rich','narrative','story-driven','story driven','deep story','choice-driven']);
+ add('Survival',['survival','crafting','scavenge']); add('Co-op',['co-op','cooperative']);
+ add('Multiplayer',['multiplayer','online multiplayer']); add('Single-player',['single-player','single player']); add('Indie',['indie']);
+ return [...out];
+}
 
-<div class="modal hidden" id="modal">
-  <div class="backdrop"></div>
-  <div class="dialog">
-    <button class="close" id="close">×</button>
-    <div class="eyebrow">GAMERGUY MATCHMAKER</div>
-    <h2 id="modalTitle">What are you looking for?</h2>
-    <p id="modalSub">Pick as many as you want. We'll do the rest.</p>
-    <div class="tag-grid" id="tagGrid"></div>
-    <div class="dialog-bottom"><span id="selectedCount">0 selected</span><button class="primary" id="matchBtn">Find my matches →</button></div>
-  </div>
-</div>
+const GPU_TIERS={
+  0:{name:'Integrated / very low',score:0,keywords:['uhd graphics','intel hd','vega 6','vega 7','iris xe','integrated']},
+  1:{name:'Entry gaming',score:1,keywords:['gtx 750','gtx 950','gtx 960','gtx 1050','gtx 1050 ti','rx 460','rx 560','rx 570']},
+  2:{name:'Mainstream gaming',score:2,keywords:['gtx 1060','gtx 1650','gtx 1660','gtx 1660 ti','rx 580','rx 5500','rx 5600','rtx 2060','rtx 3050']},
+  3:{name:'Strong gaming',score:3,keywords:['rtx 3060','rtx 3060 ti','rtx 3070','rtx 4060','rtx 4060 ti','rx 6600','rx 6700','rx 7600']},
+  4:{name:'High-end gaming',score:4,keywords:['rtx 4070','rtx 4070 super','rtx 4080','rtx 4080 super','rtx 4090','rx 7800','rx 7900']}
+};
+const CPU_TIERS={0:'very low',1:'entry',2:'mainstream',3:'strong',4:'high-end'};
+function requirementText(d){
+ return cleanHtml(
+   (d?.pc_requirements?.minimum||'')+' '+
+   (d?.pc_requirements?.recommended||'')
+ ).toLowerCase();
+}
+function parseReqRam(text){
+ const m=text.match(/(\d+)\s*gb\s*(?:ram|memory)/i);
+ return m?Number(m[1]):null;
+}
+function parseReqGpuTier(text){
+ const lower=text.toLowerCase();
+ for(const [tier,obj] of Object.entries(GPU_TIERS).sort((a,b)=>Number(b[0])-Number(a[0]))){
+   if(obj.keywords.some(k=>lower.includes(k)))return Number(tier);
+ }
+ if(/rtx|radeon rx|gtx/i.test(lower))return 2;
+ return null;
+}
+function parseReqCpuTier(text){
+ if(/i9|ryzen 9|threadripper|xeon/i.test(text))return 4;
+ if(/i7|ryzen 7|i5-1[2-9]\d\d|ryzen 5|ryzen 6/i.test(text))return 3;
+ if(/i5|ryzen 3|fx-8|fx-9/i.test(text))return 2;
+ if(/i3|pentium|athlon|celeron/i.test(text))return 1;
+ return null;
+}
+function compatibility(d){
+ if(!d?.pc_requirements)return {known:false,ok:true,label:'Compatibility unknown'};
+ const text=requirementText(d);
+ const reqRam=parseReqRam(text),reqGpu=parseReqGpuTier(text),reqCpu=parseReqCpuTier(text);
+ const ramOK=reqRam===null || Number(S.prefs.ramGB||16)>=reqRam;
+ const gpuOK=reqGpu===null || Number(S.prefs.gpuTier||2)>=reqGpu;
+ const cpuOK=reqCpu===null || Number(S.prefs.cpuTier||2)>=reqCpu;
+ const ok=ramOK&&gpuOK&&cpuOK;
+ const known=reqRam!==null||reqGpu!==null||reqCpu!==null;
+ return {
+   known,ok,
+   label:!known?'Compatibility unknown':ok?'Should run well on your PC':'May struggle on your PC',
+   reqRam,reqGpu,reqCpu
+ };
+}
+function ggGenres(a){const d=detail(a.steam_app_id);return [...new Set(inferredSignals(a,d).concat(a.genres||[]))]}
+function tasteMatch(a){
+ const gs=ggGenres(a).map(x=>x.toLowerCase());
+ const preferred=S.prefs.preferredGenres||[],avoids=S.prefs.avoidGenres||[];
+ if(avoids.some(g=>gs.includes(g.toLowerCase())))return false;
+ if(!preferred.length)return true;
+ return preferred.every(g=>gs.includes(g.toLowerCase()));
+}
+function reviewStats(d,id){
+  const live=S.reviewSummaries.get(id)||S.reviews.get(id);
+  const s=live?.query_summary;
+  const totalPos=Number(s?.total_positive||0), totalNeg=Number(s?.total_negative||0);
+  if(totalPos+totalNeg>0)return {positive:Math.round(totalPos/(totalPos+totalNeg)*100),total:totalPos+totalNeg};
+  const r=d?.recommendations;
+  const rp=Number(r?.total_positive||0), rn=Number(r?.total_negative||0);
+  if(rp+rn>0)return {positive:Math.round(rp/(rp+rn)*100),total:rp+rn};
+  return {positive:null,total:0};
+}
+function scoreInfo(a){
+ const id=a.steam_app_id,d=detail(id),r=reviewStats(d,id),meta=Number(d?.metacritic?.score)||null;
+ let combined10=null;
+ if(r.positive!==null && meta!==null){
+   combined10=Math.round(((r.positive/10)*0.65+(meta/10)*0.35)*10)/10;
+ }else if(r.positive!==null){
+   combined10=Math.round((r.positive/10)*10)/10;
+ }else if(meta!==null){
+   combined10=Math.round((meta/10)*10)/10;
+ }
+ const score=combined10===null?null:Math.round(combined10*10);
+ return {score,combined10,positive:r.positive,meta,recs:Math.max(r.total,Number(d?.recommendations?.total)||0)};
+}
+function recommendationReason(a){
+ const gs=ggGenres(a).map(x=>x.toLowerCase()),m=(S.prefs.preferredGenres||[]).filter(g=>gs.includes(g.toLowerCase())),x=scoreInfo(a),c=compatibility(detail(a.steam_app_id));
+ const parts=[];
+ if(m.length)parts.push(`Matches ${m.slice(0,3).join(', ')}`);
+ if(x.positive!==null)parts.push(`${x.positive}% Steam positive`);
+ if(x.meta!==null)parts.push(`${x.meta} Metacritic`);
+ if(c.known&&c.ok)parts.push('Fits your PC specs');
+ return parts.length?parts.join(' · '):'Based on your browsing and saved taste';
+}
+function recommendationReason(a){const gs=ggGenres(a).map(x=>x.toLowerCase()),m=(S.prefs.preferredGenres||[]).filter(g=>gs.includes(g.toLowerCase())),x=scoreInfo(a);return m.length?`Matches ${m.slice(0,3).join(', ')}${x.positive!==null?` · ${x.positive}% Steam positive`:''}`:'Based on your browsing and saved taste'}
+function tier(score){
+ if(score===null)return ['gray','Awaiting scores'];
+ if(score>=92)return ['purple','Absolute masterpiece'];
+ if(score>=80)return ['green','Great game'];
+ if(score>=60)return ['yellow','Mixed / worth checking'];
+ return ['red','Poor reception'];
+}
+function scoreDot(a){
+ const x=scoreInfo(a),t=tier(x.score);
+ return `<span class="score-dot dot-${t[0]}" title="${esc(t[1])}"></span>${x.combined10===null?'No score yet':`GamerGuy ${x.combined10.toFixed(1)}/10`}`;
+}
+function priceText(d){
+ if(!d)return 'Loading price…';
+ if(d.is_free)return 'Free';
+ const p=d.price_overview;
+ if(!p)return 'Price unavailable';
+ return `${esc(p.final_formatted)}${p.discount_percent?` <span class="old">${esc(p.initial_formatted)}</span>`:''}`;
+}
+function ggMatches(a){
+  if(S.hidden.has(a.steam_app_id))return false;
+  if(S.q&&!a.name.toLowerCase().includes(S.q.toLowerCase()))return false;
+  const gs=ggGenres(a).map(x=>x.toLowerCase());
+  if(S.selectedGenres.length&&!S.selectedGenres.every(g=>gs.includes(g.toLowerCase())))return false;
+  const d=detail(a.steam_app_id);
+  if(d){
+    if(S.prefs.freeOnly&&!d.is_free)return false;
+    if(S.prefs.maxPrice<100&&(d.price_overview?.final||0)>S.prefs.maxPrice*100&&!d.is_free)return false;
+    if(S.prefs.minScore>0&&(d.metacritic?.score||0)<S.prefs.minScore)return false;
+    const rs=reviewStats(d,a.steam_app_id);
+    if(S.prefs.hideBad&&rs.positive!==null&&rs.positive<S.prefs.minSteamPositive)return false;
+    if(S.prefs.avoidEarly&&d.is_early_access)return false;
+    if(S.prefs.useSpecs!==false&&!compatibility(d).ok)return false;
+  }
+  return true;
+}
+function ggScore(a){const x=scoreInfo(a);let n=x.score??50,gs=ggGenres(a).map(g=>g.toLowerCase());n+=(S.prefs.preferredGenres||[]).reduce((v,g)=>v+(gs.includes(g.toLowerCase())?18:0),0);if(S.prefs.preferSingle&&gs.includes('single-player'))n+=8;if(S.prefs.preferIndie&&gs.includes('indie'))n+=8;if(S.owned.has(a.steam_app_id)||S.hidden.has(a.steam_app_id))n=-999;if(S.prefs.useSpecs!==false&&!compatibility(detail(a.steam_app_id)).ok)n=-999;return n+(a.name.length%3)}
+function ggTop(pool){return [...pool].filter(tasteMatch).sort((a,b)=>ggScore(b)-ggScore(a)).slice(0,10)}
+async function buildTastePool(){
+  const preferred=[...(S.prefs.preferredGenres||[])].filter(Boolean);
+  const avoided=[...(S.prefs.avoidGenres||[])].map(x=>x.toLowerCase());
+  let pool=[];
 
-<div class="modal hidden" id="searchModal">
-  <div class="backdrop"></div>
-  <div class="dialog search-dialog">
-    <button class="close" id="closeSearch">×</button>
-    <div class="eyebrow">GAME DATABASE</div><h2>Know what you're looking for?</h2>
-    <div class="searchbox"><span>⌕</span><input id="searchInput" placeholder="Search a game..." autofocus></div>
-    <div id="searchResults" class="search-results"></div>
-  </div>
-</div>
+  if(preferred.length){
+    const batches=await Promise.all(preferred.slice(0,6).map(g=>storeSearch(g)));
+    const candidates=[...new Map(batches.flat().map(a0=>[a0.steam_app_id,a0])).values()];
+    for(const a0 of candidates)S.map.set(a0.steam_app_id,a0);
+    await hydrate(candidates.slice(0,180).map(a0=>a0.steam_app_id));
 
-<div class="modal hidden" id="resultsModal">
-  <div class="backdrop"></div>
-  <div class="dialog results-dialog">
-    <button class="close" id="closeResults">×</button>
-    <div class="eyebrow">YOUR RESULTS</div><h2>Games picked for you.</h2>
-    <p id="resultSummary"></p>
-    <div id="results" class="results"></div>
-  </div>
-</div>
+    pool=candidates.map(a0=>{
+      const id=a0.steam_app_id;
+      const d=detail(id);
+      const gs=ggGenres(a0).map(x=>x.toLowerCase());
+      const matches=preferred.filter(g=>gs.includes(g.toLowerCase())).length;
+      return {a:a0,matches,d};
+    }).filter(x=>{
+      const {a:a0,matches,d}=x,id=a0.steam_app_id,gs=ggGenres(a0).map(g=>g.toLowerCase());
+      if(S.hidden.has(id)||S.owned.has(id)||!d)return false;
+      if(!matches)return false;
+      if(avoided.some(g=>gs.includes(g)))return false;
+      if(S.prefs.freeOnly&&!d.is_free)return false;
+      if(S.prefs.maxPrice<100&&!d.is_free&&(d.price_overview?.final||0)>S.prefs.maxPrice*100)return false;
+      if(S.prefs.minScore>0&&(Number(d.metacritic?.score)||0)<S.prefs.minScore)return false;
+      if(S.prefs.hideBad){
+        const r=reviewStats(d,id);
+        if(r.positive!==null&&r.positive<S.prefs.minSteamPositive)return false;
+      }
+      if(S.prefs.avoidEarly&&d.is_early_access)return false;
+      if(S.prefs.useSpecs!==false&&!compatibility(d).ok)return false;
+      return true;
+    }).sort((x,y)=>{
+      if(y.matches!==x.matches)return y.matches-x.matches;
+      return ggScore(y.a)-ggScore(x.a);
+    }).map(x=>x.a);
+  }else{
+    const viewed=S.viewed.slice(-12).map(id=>S.map.get(id)).filter(Boolean);
+    const counts={};
+    for(const a0 of viewed)for(const g of ggGenres(a0))counts[g]=(counts[g]||0)+1;
+    const inferred=Object.entries(counts).sort((x,y)=>y[1]-x[1]).slice(0,4).map(x=>x[0]);
+    if(inferred.length){
+      const batches=await Promise.all(inferred.map(g=>storeSearch(g)));
+      const candidates=[...new Map(batches.flat().map(a0=>[a0.steam_app_id,a0])).values()];
+      for(const a0 of candidates)S.map.set(a0.steam_app_id,a0);
+      await hydrate(candidates.slice(0,140).map(a0=>a0.steam_app_id));
+      pool=candidates.filter(a0=>!S.hidden.has(a0.steam_app_id)&&!S.owned.has(a0.steam_app_id)&&tasteMatch(a0));
+    }else{
+      pool=S.apps.filter(a0=>!S.hidden.has(a0.steam_app_id)&&!S.owned.has(a0.steam_app_id));
+    }
+  }
 
-<div class="modal hidden" id="gameModal">
-  <div class="backdrop"></div>
-  <div class="dialog game-dialog">
-    <button class="close" id="closeGame">×</button>
-    <div id="gameDetail"></div>
-  </div>
-</div>
+  const ranked=[...pool].sort((a0,b0)=>{
+    const sb=ggScore(b0),sa=ggScore(a0);
+    if(sb!==sa)return sb-sa;
+    return a0.name.localeCompare(b0.name);
+  });
+  const bands=[];
+  for(let i=0;i<ranked.length&&bands.length<10;i+=Math.max(1,Math.floor(ranked.length/10))){
+    const band=ranked.slice(i,i+3);
+    if(band.length){
+      bands.push(band[Math.floor(Math.random()*band.length)]);
+    }
+  }
+  return [...new Map(bands.map(a0=>[a0.steam_app_id,a0])).values()].slice(0,10);
+}
+function searchRank(name,term){
+ const a=String(name||'').toLowerCase().trim(), b=String(term||'').toLowerCase().trim();
+ if(!b)return 0;
+ if(a===b)return 10000;
+ if(a.startsWith(b))return 8000;
+ if(a.split(/[:\-–—]/)[0].trim()===b)return 7600;
+ if(a.includes(b))return 5500;
+ const words=b.split(/\s+/).filter(Boolean);
+ return words.reduce((n,w)=>n+(a.includes(w)?500:0),0)-Math.min(200,Math.abs(a.length-b.length));
+}
+async function storeSearch(term){
+  try{
+    const j=await edge('search',{query:String(term||''),cc:cc()});
+    return (j.results||[]).map(x=>({
+      steam_app_id:Number(x.steam_app_id),
+      name:x.name||'',
+      tiny_image:x.tiny_image||'',
+      genres:x.genres||[],
+      _searchScore:Number(x._searchScore||0)
+    })).sort((a,b)=>b._searchScore-a._searchScore);
+  }catch(e){
+    console.warn('Steam search failed',term,e);
+    const q=String(term).toLowerCase();
+    return S.apps.filter(a=>String(a.name||'').toLowerCase().includes(q))
+      .sort((a,b)=>searchRank(b.name,term)-searchRank(a.name,term));
+  }
+}
+async function exactSearch(term){
+  const rows=await storeSearch(term);
+  const q=term.toLowerCase().trim();
+  return rows.sort((a,b)=>{
+    const an=a.name.toLowerCase(),bn=b.name.toLowerCase();
+    const ae=an===q,be=bn===q;
+    if(ae!==be)return ae?-1:1;
+    const ap=an.startsWith(q),bp=bn.startsWith(q);
+    if(ap!==bp)return ap?-1:1;
+    return (b._searchScore||0)-(a._searchScore||0);
+  }).slice(0,50);
+}
+function card(a,n){
+ const id=a.steam_app_id,d=detail(id),si=scoreInfo(a),saved=S.wish.includes(id);
+ const primary=d?.header_image||a.tiny_image||`https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/header.jpg`;
+ const fallbacks=imageFallbacks(id,'poster',[d?.header_image,a.tiny_image]);
+ const price=d?priceText(d):'Loading price…';
+ return `<a class="gamecard" data-game-id="${id}" href="#game-${id}" aria-label="Open ${esc(a.name)}">
+   <div class="gameposter">
+     <img loading="lazy" src="${esc(primary)}" data-fallbacks="${esc(fallbacks.join('|'))}" data-fi="1"
+       onerror="imgNext(this)" alt="${esc(a.name)}">
+     ${n?`<span class="rank">#${n}</span>`:''}
+     <button type="button" class="save ${saved?'saved':''}" data-wish-id="${id}" aria-label="${saved?'Remove from wishlist':'Add to wishlist'}">${ggIcon('star')}</button>
+     <div class="posterfade"></div>
+   </div>
+   <div class="gamecardinfo">
+     <div class="gametitle">${esc(a.name)}</div>
+     <div class="gameprice">${price}</div>
+     <div class="scoreline">${scoreDot(a)}${si.positive!==null?` · ${si.positive}% Steam positive`:''}${si.meta!==null?` · ${si.meta} Metacritic`:''}</div>
+   </div>
+ </a>`;
+}
+function imgNext(img){
+ const list=(img.dataset.fallbacks||'').split('|').filter(Boolean);
+ let i=Number(img.dataset.fi||0);
+ if(i<list.length){
+   img.dataset.fi=String(i+1);
+   img.src=list[i];
+   return;
+ }
+ img.onerror=null;
+ img.style.opacity='0';
+ const parent=img.closest('.gameposter,.gamepagehero');
+ if(parent && !parent.querySelector('.imagefallback')){
+   const f=document.createElement('div');
+   f.className='imagefallback';
+   f.textContent='Artwork unavailable';
+   parent.appendChild(f);
+ }
+}
+async function hydrate(ids,{rerender=false}={}){
+ const unique=[...new Set(ids)].filter(Boolean);
+ const need=unique.filter(id=>!detail(id)||!S.reviewSummaries.has(id));
+ if(!need.length)return;
+ for(let i=0;i<need.length;i+=6){
+   await Promise.all(need.slice(i,i+6).map(async id=>{
+     await Promise.allSettled([info(id),reviewInfo(id)]);
+   }));
+ }
+ if(rerender && S.page!=='game')render();
+}
+async function load(){
+ if(S.loading||!S.more)return;
+ S.loading=true;render();
+ try{
+   const d=await edge('get_app_page');
+   (d.apps||[]).forEach(a=>{if(!a.steam_app_id||!a.name||S.map.has(a.steam_app_id))return;delete a._searchScore;S.map.set(a.steam_app_id,a);S.apps.push(a)});
+   const next=d.next_last_appid||d.last_appid||S.cursor;
+   S.cursor=next;S.more=!!d.has_more_results;
+   $('#status').textContent=`Steam online · ${S.apps.length.toLocaleString()} games loaded`;
+ }catch(e){$('#status').textContent='Steam connection error';toast(e.message)}
+ S.loading=false;render();
+}
+async function ensureSearch(){
+  if(!S.q)return;
+  S.loading=true;
+  render();
+  try{
+    const rows=await exactSearch(S.q);
+    for(const a0 of rows){
+      if(!S.map.has(a0.steam_app_id)){
+        S.map.set(a0.steam_app_id,a0);
+        S.apps.push(a0);
+      }else{
+        const existing=S.map.get(a0.steam_app_id);
+        existing.name=a0.name||existing.name;
+        existing.tiny_image=a0.tiny_image||existing.tiny_image;
+      }
+    }
+    const ids=rows.slice(0,40).map(a0=>a0.steam_app_id);
+    await hydrate(ids);
+    preloadImages(ids);
+    if(S.selectedGenres.length) await ensureGenres({skipInitialRender:true});
+  }catch(e){
+    toast(e.message||'Search failed');
+  }finally{
+    S.loading=false;
+    render();
+  }
+}
+async function ensureGenres({skipInitialRender=false}={}){
+ if(!S.selectedGenres.length)return;
+ S.filterBusy=true;
+ if(!skipInitialRender)render();
+ try{
+   const rows=(await Promise.all(S.selectedGenres.slice(0,5).map(storeSearch))).flat();
+   const seen=new Set();
+   for(const a0 of rows){
+     if(seen.has(a0.steam_app_id))continue;
+     seen.add(a0.steam_app_id);
+     if(!S.map.has(a0.steam_app_id)){S.map.set(a0.steam_app_id,a0);S.apps.push(a0)}
+   }
+   await hydrate([...seen].slice(0,140));
+ }finally{
+   S.filterBusy=false;
+   render();
+ }
+}
+async function loadMore(){
+ if(S.loading||S.loadMoreBusy)return;
+ S.loadMoreBusy=true;
+ try{
+   let added=0,pages=0;
+   const targetQuery=!!S.q;
+   while(S.more && pages<3 && (!targetQuery || added<20)){
+     const before=S.apps.length;
+     await load();
+     pages++;
+     if(targetQuery){
+       added += S.apps.slice(before).filter(a0=>a0.name.toLowerCase().includes(S.q.toLowerCase())).length;
+     }else{
+       added += S.apps.length-before;
+     }
+   }
+   if(S.selectedGenres.length) await ensureGenres({skipInitialRender:true});
+   render();
+   if(!S.more)toast('You reached the end of the currently available Steam catalog.');
+ }catch(e){
+   toast(e.message||'Could not load more games');
+ }finally{
+   S.loadMoreBusy=false;
+   render();
+ }
+}
+function nav(p){
+ const allowed=['home','discover','lists','wishlist','alerts','settings'];
+ if(!allowed.includes(p))p='home';
+ S.page=p;S.gameId=null;history.replaceState(null,'',p==='home'?'#home':'#'+p);render();
+}
+function openGame(id){
+ id=Number(id);
+ if(!Number.isFinite(id)){toast('Invalid game ID');return}
+ const game=S.map.get(id);
+ if(!game){
+   toast('Game data is still loading. Please try again.');
+   return;
+ }
+ S.gameId=id; S.page='game';
+ if(!S.viewed.includes(id))S.viewed.push(id);
+ save();
+ history.pushState(null,'',`#game-${id}`);
+ renderGameLoading();
+ loadGame(id);
+}
+function renderGameLoading(){document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('on',false));$('#view').innerHTML=`<section class="gamepage"><button class="btn backbtn" onclick="goBack()">${ggIcon('arrow')} Back</button><div class="loadingdetail">Loading game page, ratings, price and Steam reviews…</div></section>`}
+function goBack(){S.page='discover';S.gameId=null;history.replaceState(null,'','#discover');render()}
+async function loadGame(id){
+ const a=S.map.get(Number(id));
+ if(!a){ $('#view').innerHTML=`<section class="gamepage"><button class="btn backbtn" onclick="goBack()">${ggIcon('arrow')} Back to results</button><div class="empty">This game is no longer in the current search results. Search for it again.</div></section>`; return; }
+ try{
+   const d=await info(id);
+   if(d){
+     const rv=await reviewInfo(id);
+     renderGame(a,d,rv,null);
+     return;
+   }
+   // Never leave the user on an infinite loading screen.
+   const basic={
+     name:a.name,
+     header_image:a.tiny_image||cover(id,'header'),
+     genres:a.genres||[],
+     price_overview:null
+   };
+   renderGame(a,basic,null,null);
+   toast('Steam details are temporarily unavailable for this title.');
+ }catch(e){
+   console.error('GamerGuy game page:',e);
+   const basic={name:a.name,header_image:a.tiny_image||cover(id,'header'),genres:a.genres||[]};
+   renderGame(a,basic,null,null);
+   toast(e.message||'Steam details unavailable');
+ }
+}
+async function refreshRecommendations(){
+  if(S.recBusy)return S.recs||[];
+  S.recBusy=true;
+  try{
+    S.recs=await buildTastePool();
+    return S.recs;
+  }finally{
+    S.recBusy=false;
+    if(S.page==='home')render();
+  }
+}
+async function reviewInfo(id){
+  if(S.reviewSummaries.has(id))return S.reviewSummaries.get(id);
+  try{
+    const j=await edge('get_reviews',{appid:Number(id)});
+    S.reviewSummaries.set(id,j||null);
+    return j||null;
+  }catch{
+    S.reviewSummaries.set(id,null);
+    return null;
+  }
+}
+async function reviews(id){
+  if(S.reviewLists.has(id))return S.reviewLists.get(id);
+  try{
+    const j=await edge('get_reviews',{appid:Number(id)});
+    S.reviewLists.set(id,j||null);
+    return j||null;
+  }catch{return S.reviewLists.get(id)||null}
+}
+async function news(id){try{return (await jsonFetch(`${NEWS}?appid=${id}&count=5&maxlength=1`))?.appnews?.newsitems||[]}catch{return []}}
+function cleanHtml(s){const el=document.createElement('div');el.innerHTML=s||'';return (el.textContent||el.innerText||'').replace(/\s+/g,' ').trim()}
+function analysisData(d,x,summary){const factors=[];if(x.positive!==null)factors.push(x.positive>=90?'Steam players are overwhelmingly positive.':x.positive>=75?'Steam reception is broadly positive.':x.positive>=60?'Steam reception is mixed but leans positive.':'Steam reception is below the positive range and pulls the score down.');if(x.meta!==null)factors.push(x.meta>=85?'Critics rate it exceptionally highly.':x.meta>=70?'Critic reception is generally favorable.':x.meta>=50?'Critic reception is mixed.':'Critic reception is weak where critic data exists.');if(x.recs>10000)factors.push('A very large Steam review sample makes the player sentiment more reliable.');else if(x.recs>1000)factors.push('There is a substantial Steam review sample behind the player sentiment.');else if(x.recs)factors.push('The Steam review sample is smaller, so sentiment is less statistically stable.');if(d.is_early_access)factors.push('Early Access means the current experience can change significantly.');if(d.demos?.length)factors.push('A demo is available, so you can try it before buying.');return {desc:cleanHtml(d.about_the_game||d.detailed_description||d.short_description||''),factors}}
 
-<footer><span>© 2026 GamerGuy</span><span>Built for horror fans.</span></footer>
-<script src="app.js"></script>
-</body>
-</html>
+function recordDiscount(id,d){
+  const pct=Number(d?.price_overview?.discount_percent||0);
+  if(!pct)return;
+  const key=String(id);
+  const now=Date.now();
+  const h=Array.isArray(S.discountHistory[key])?S.discountHistory[key]:[];
+  const last=h[h.length-1];
+  if(!last || last.percent!==pct || now-last.time>12*60*60*1000){
+    h.push({percent:pct,time:now});
+    S.discountHistory[key]=h.slice(-60);
+    save();
+  }
+}
+function lowestObservedDiscount(id,currentPct){
+  const h=S.discountHistory[String(id)]||[];
+  const observed=h.map(x=>Number(x.percent)).filter(Number.isFinite);
+  if(currentPct>0)observed.push(currentPct);
+  return observed.length?Math.max(...observed):null;
+}
+function seasonalDiscountPrediction(d,id){
+  const h=S.discountHistory[String(id)]||[];
+  const seen=h.map(x=>Number(x.percent)).filter(x=>Number.isFinite(x)&&x>0);
+  const current=Number(d?.price_overview?.discount_percent||0);
+  const month=new Date().getMonth()+1;
+  const seasonal=(month===11||month===12)?'holiday/late-year sale':(month===6||month===7)?'summer sale':(month===9||month===10)?'autumn sale':'the next major Steam sale';
+  if(current>0){
+    const target=Math.max(current,seen.length?Math.max(...seen):current);
+    return `Already discounted now. A similar or deeper discount is most likely around the next major Steam sale (${seasonal}).`;
+  }
+  if(seen.length){
+    const peak=Math.max(...seen);
+    const hasFrequent= h.length>=3;
+    return `Estimated next discount: around ${Math.max(10,Math.round(peak/10)*10)}% off, most likely around ${seasonal}.${hasFrequent?' This estimate uses discounts GamerGuy has observed for this title.':''}`;
+  }
+  return `Estimated next discount: likely 10–25% during ${seasonal}. This is an estimate, not a guaranteed Steam price forecast.`;
+}
+function aaaClassification(d){
+  const pubs=[...(d?.publishers||[]),...(d?.developers||[])].join(' ').toLowerCase();
+  const known=[
+    'electronic arts','ea','ubisoft','activision','blizzard','take-two','rockstar',
+    'bethesda','zenimax','square enix','capcom','sega','bandai namco','sony',
+    'playstation','microsoft','xbox game studios','nintendo','warner bros',
+    '2k','bandai','konami','namco','deep silver','focus entertainment'
+  ];
+  const knownHit=known.some(k=>pubs.includes(k));
+  const budgetSignal=(Number(d?.price_overview?.initial)||0)>=3999;
+  const polishSignal=Boolean(d?.metacritic?.score && (d?.screenshots?.length||0)>=5);
+  if(knownHit || (budgetSignal && polishSignal))return 'AAA / major publisher';
+  const indieSignals=['indie','small team','solo developer','independent'];
+  const text=[d?.short_description||'',d?.about_the_game||'',...(d?.genres||[]).map(x=>x.description)].join(' ').toLowerCase();
+  if(indieSignals.some(x=>text.includes(x)))return 'Indie / independent';
+  return 'Non-AAA';
+}
+function renderGame(a,d,rv,nw){
+ const x=scoreInfo(a),t=tier(x.score),rating=S.ratings[a.steam_app_id]||0;
+ const genres=(d.genres||[]).map(g=>g.description),summary=rv?.query_summary;
+ const sale=d.price_overview?.discount_percent>0,watched=!!S.watch[a.steam_app_id],owned=S.owned.has(a.steam_app_id);
+ const an=analysisData(d,x,summary),shots=(d.screenshots||[]).slice(0,9);
+ const compat=compatibility(d); recordDiscount(a.steam_app_id,d); const currentDiscount=Number(d?.price_overview?.discount_percent||0); const lowestDiscount=lowestObservedDiscount(a.steam_app_id,currentDiscount); const discountPrediction=seasonalDiscountPrediction(d,a.steam_app_id); const classLabel=aaaClassification(d);
+ const req=d.pc_requirements||{};
+ const minReq=cleanHtml(req.minimum||'Minimum requirements not provided by Steam.');
+ const recReq=cleanHtml(req.recommended||'Recommended requirements not provided by Steam.');
+ const longDesc=an.desc||'Steam has not provided a longer description for this title.';
+ const verdict=x.combined10===null
+   ? 'Not enough public review data is available to make a defensible combined score yet.'
+   : `${t[1]}. GamerGuy combines Steam player sentiment${x.positive!==null?` at ${x.positive}% positive`:''} with Metacritic${x.meta!==null?` at ${x.meta}/100`:''}. Steam contributes 65% and Metacritic 35%, without artificially boosting the result.`;
+
+ const compatClass=!compat.known?'unknown':compat.ok?'ok':'bad';
+ const compatText=compat.known?(compat.ok?'Should run well on your PC':'May struggle on your PC'):'Compatibility data unavailable';
+
+ $('#view').innerHTML=`
+ <section class="gamepage">
+   <button class="btn backbtn" onclick="goBack()">${ggIcon('arrow')} Back to results</button>
+
+   <div class="gamepagehero">
+     <img src="${esc(d.header_image||a.tiny_image||cover(a.steam_app_id,'header'))}"
+       data-fallbacks="${esc(imageFallbacks(a.steam_app_id,'header',[d.header_image,a.tiny_image]).join('|'))}"
+       data-fi="1" onerror="imgNext(this)" alt="${esc(d.name)}">
+   </div>
+
+   <div class="gamepagehead">
+     <h1>${esc(d.name)}</h1>
+     <div class="muted">${esc((d.developers||[]).join(', '))}${d.release_date?.date?' · '+esc(d.release_date.date):''}</div>
+     <div class="genrechips">${genres.map(g=>`<span class="genrechip">${esc(g)}</span>`).join('')}</div>
+   </div>
+
+   <div class="game-score-panel">
+
+     <div class="score-overview">
+       <div class="bigscoreblock">
+         <div class="score-dot dot-${t[0]}" style="width:14px;height:14px;display:inline-block;margin-right:7px"></div>
+         <span class="bigscore">${x.combined10===null?'—':x.combined10.toFixed(1)}<small>/10</small></span>
+         <div class="score-caption">GamerGuy combined score · ${esc(t[1])}</div>
+       </div>
+
+       <div class="score-details">
+         <div class="score-detail"><span>Steam Positive</span><b>${x.positive!==null?x.positive+'%':'Not available'}</b></div>
+         <div class="score-detail"><span>Metacritic</span><b>${x.meta!==null?x.meta+'/100':'Not available'}</b></div>
+         <div class="score-detail"><span>Steam Reviews</span><b>${x.recs?x.recs.toLocaleString():'Not available'}</b></div>
+         <div class="score-detail"><span>Current Price</span><b>${priceText(d)}</b></div>
+         <div class="score-detail"><span>Lowest discount observed</span><b>${lowestDiscount!==null?lowestDiscount+'% off':'Not observed yet'}</b></div>
+         <div class="score-detail"><span>Game class</span><b>${esc(classLabel)}</b></div>
+         <div class="score-detail"><span>Demo</span><b>${d.demos?.length?'Available':'No'}</b></div>
+       </div>
+     </div>
+
+     <div class="spec-panel">
+       <h3>PC compatibility</h3>
+       <span class="compat-pill ${compatClass}">${compatText}</span>
+       <div class="spec-columns" style="margin-top:13px">
+         <div class="spec-list"><h4>Minimum required</h4>${esc(minReq)}</div>
+         <div class="spec-list"><h4>Recommended</h4>${esc(recReq)}</div>
+       </div>
+     </div>
+
+   </div>
+
+   <div class="description-panel">
+     <h2>Game description</h2>
+     <p class="longdesc">${esc(longDesc)}</p>
+   </div>
+   <div class="description-panel">
+     <h2>Price history & forecast</h2>
+     <div class="score-details">
+       <div class="score-detail"><span>Current discount</span><b>${currentDiscount?currentDiscount+'% off':'No sale right now'}</b></div>
+       <div class="score-detail"><span>Lowest discount GamerGuy has observed</span><b>${lowestDiscount!==null?lowestDiscount+'% off':'Not observed yet'}</b></div>
+       <div class="score-detail"><span>Next discount estimate</span><b>${esc(discountPrediction)}</b></div>
+     </div>
+     <p class="muted" style="margin-top:10px;font-size:11px">Discount history is built from prices GamerGuy has observed. Forecasts are estimates, not guarantees.</p>
+   </div>
+
+   <div class="detailgrid" style="margin-top:14px">
+     <aside class="detailpanel">
+       <h2>Your options</h2>
+       <div class="optionstack">
+         <button class="btn ${S.wish.includes(a.steam_app_id)?'green':''}" onclick="wish(${a.steam_app_id})">${ggIcon('star')} ${S.wish.includes(a.steam_app_id)?'Wishlisted':'Add to wishlist'}</button>
+         <button class="btn ${watched?'green':''}" onclick="toggleWatch(${a.steam_app_id})">${ggIcon('bell')} ${watched?'Watching alerts':'Watch this game'}</button>
+         <button class="btn ${owned?'green':''}" onclick="markOwned(${a.steam_app_id})">${ggIcon('check')} ${owned?'Owned':'I already own this'}</button>
+         <button class="btn" onclick="hideGame(${a.steam_app_id})">${ggIcon('eyeoff')} Never show again</button>
+         <a class="btn primary" target="_blank" rel="noopener" href="https://store.steampowered.com/app/${a.steam_app_id}/">Open on Steam</a>
+       </div>
+
+       <div class="personalrate">
+         <h3>Your rating</h3>
+         <div class="stars">${[1,2,3,4,5].map(n=>`<button class="rate ${rating>=n?'on':''}" onclick="rate(${a.steam_app_id},${n})">${ggIcon('star')}</button>`).join('')}</div>
+       </div>
+     </aside>
+
+     <div class="detailpanel">
+       <h2>Why GamerGuy gave this score</h2>
+       <div class="verdictbox">
+         <h3>${esc(t[1])}</h3>
+         <p class="muted">${esc(verdict)}</p>
+       </div>
+       <div class="analysisgrid" style="margin-top:12px">
+         ${an.factors.map((f,i)=>`<div class="analysiscard"><b>${['Player reception','Critic reception','Confidence','Game context','Try before buy'][i]||'Analysis'}</b><span>${esc(f)}</span></div>`).join('')}
+       </div>
+     </div>
+   </div>
+
+   ${shots.length?`
+   <div class="detailpanel" style="margin-top:14px">
+     <h2>More screenshots</h2>
+     <div class="gamegallery">
+       ${shots.map(s=>{
+         const u=`${EDGE}?action=screenshot&url=${encodeURIComponent(s.path_full||s.path_thumbnail||'')}`;
+         return `<a href="${u}" target="_blank" rel="noopener"><img loading="lazy" src="${u}" alt="${esc(d.name)} screenshot"></a>`;
+       }).join('')}
+     </div>
+   </div>`:''}
+
+   <div class="detailpanel" style="margin-top:14px">
+     <h2>Steam reviews</h2>
+     ${rv?.reviews?.length
+       ? rv.reviews.map(r=>`<article class="review"><div class="reviewtop"><b>${r.voted_up?'Positive':'Negative'}</b><span>${new Date((r.timestamp_created||0)*1000).toLocaleDateString()}</span></div><p>${esc((r.review||'').slice(0,700))}${(r.review||'').length>700?'…':''}</p></article>`).join('')
+       : '<div class="empty">Steam review text is temporarily unavailable.</div>'}
+   </div>
+ </section>`;
+}
+function home(){
+ const recent=S.viewed.map(id=>S.map.get(id)).filter(a=>a&&!S.hidden.has(a.steam_app_id)).slice(-6).reverse();
+ if(!window.ggRecKickoff){
+   window.ggRecKickoff=true;
+   setTimeout(()=>refreshRecommendations().catch(e=>console.warn('Recommendation build failed',e)),0);
+ }
+ const rec=S.recs||[];
+ const recMarkup=S.recBusy&&!rec.length
+   ? `<div class="rec-loading"><span class="spinner"></span><span>Building your recommendations…</span></div>`
+   : (rec.length?`<div class="grid">${rec.map((a0,i)=>card(a0,i+1)).join('')}</div>`:`<div class="tasteempty">Choose preferred genres in Settings to build recommendations.</div>`);
+ return `<section class="hero"><div class="eyebrow">GAMER DISCOVERY</div><h1>Find games that fit.</h1><p>Search Steam, combine genres, tune your taste, and get recommendations based on what you actually like.</p><div class="actions"><button class="btn primary" onclick="focusQ()">${ggIcon('search')} Search Steam</button><button class="btn" onclick="nav('discover')">${ggIcon('discover')} Discover</button></div></section><section class="section"><div class="head"><div><h2>Top 10 for you</h2><p>${S.prefs.preferredGenres.length?`Tailored to: ${esc(S.prefs.preferredGenres.join(', '))}`:'Based on your browsing and saved taste'}</p></div></div>${recMarkup}</section>${recent.length?`<section class="section"><div class="head"><div><h2>Recently viewed</h2></div></div><div class="grid">${recent.map(a0=>card(a0)).join('')}</div></section>`:''}`;
+}
+function wishlist(){const g=S.wish.map(id=>S.map.get(id)).filter(a=>a&&!S.hidden.has(a.steam_app_id));setTimeout(()=>hydrate(g.map(a=>a.steam_app_id)),20);return `<section><div class="head"><div><h2>Wishlist</h2><p>Starred games follow your notification settings.</p></div></div>${g.length?`<div class="grid">${g.map(a=>card(a)).join('')}</div>`:'<div class="empty">Your wishlist is empty.</div>'}</section>`}
+function lists(){return `<section><div class="head"><div><h2>My Lists</h2><p>Personal collections.</p></div><button class="btn primary" onclick="newList()">${ggIcon('plus')} New list</button></div>${Object.entries(S.lists).map(([n,ids])=>{const g=ids.map(id=>S.map.get(id)).filter(Boolean);setTimeout(()=>hydrate(g.map(a=>a.steam_app_id)),20);return `<section class="section"><div class="head"><div><h2>${esc(n)}</h2><p>${g.length} games</p></div></div><div class="grid">${g.map(a=>card(a)).join('')||'<div class="empty">Empty list.</div>'}</div></section>`}).join('')||'<div class="empty">Create a list and start collecting games.</div>'}</section>`}
+function alerts(){const g=Object.keys(S.watch).map(Number).map(id=>S.map.get(id)).filter(Boolean);return `<section><div class="head"><div><h2>Alerts</h2><p>Control sale and update notifications.</p></div><button class="btn green" onclick="notifyPermission()">${ggIcon('bell')} Enable notifications</button></div><div class="settinggrid"><div class="setting"><b>Sale alerts</b><span>Notify when a watched game gets discounted.</span><label class="switch"><input type="checkbox" ${S.prefs.notifySale?'checked':''} onchange="setPref('notifySale',this.checked)"><span></span></label></div><div class="setting"><b>Update alerts</b><span>Notify when Steam posts new update/news activity.</span><label class="switch"><input type="checkbox" ${S.prefs.notifyUpdate?'checked':''} onchange="setPref('notifyUpdate',this.checked)"><span></span></label></div></div>${g.map(a=>`<div class="listrow"><div class="grow"><b>${esc(a.name)}</b><br><span class="muted">Watching ${S.watch[a.steam_app_id]?.sale!==null?'sales':''}${S.watch[a.steam_app_id]?.update?' and updates':''}</span></div><button class="btn" onclick="openGame(${a.steam_app_id})">Open</button></div>`).join('')}</section>`}
+function settings(){
+ const G=['Action','Adventure','Casual','Co-op','Early Access','Free to Play','Horror','Indie','Multiplayer','RPG','Racing','Simulation','Single-player','Sports','Strategy','Survival','Survival Horror','Story Rich','Psychological Horror'];
+ const regions=[['IN','INR','India'],['US','USD','United States'],['GB','GBP','United Kingdom'],['DE','EUR','Germany / Euro'],['CA','CAD','Canada'],['AU','AUD','Australia'],['JP','JPY','Japan']];
+ const gpus=Object.entries(GPU_TIERS).map(([k,v])=>`<option value="${k}" ${Number(S.prefs.gpuTier)===Number(k)?'selected':''}>${v.name}</option>`).join('');
+ return `<section><div class="head"><div><h2>Settings</h2><p>Control recommendations, filters, prices, alerts and PC compatibility.</p></div></div><div class="settings">
+ <div class="panel"><h3>PC specs</h3><p class="muted">GamerGuy uses your hardware profile to avoid recommending games that are likely to run poorly.</p>
+   <div class="settingrow"><span>RAM</span><select class="num" onchange="setPref('ramGB',Number(this.value))"><option ${S.prefs.ramGB===8?'selected':''} value="8">8 GB</option><option ${S.prefs.ramGB===16?'selected':''} value="16">16 GB</option><option ${S.prefs.ramGB===32?'selected':''} value="32">32 GB</option><option ${S.prefs.ramGB===64?'selected':''} value="64">64 GB</option></select></div>
+   <div class="settingrow"><span>GPU class</span><select class="num" onchange="setPref('gpuTier',Number(this.value))">${gpus}</select></div>
+   <div class="settingrow"><span>CPU class</span><select class="num" onchange="setPref('cpuTier',Number(this.value))"><option ${S.prefs.cpuTier===0?'selected':''} value="0">Very low</option><option ${S.prefs.cpuTier===1?'selected':''} value="1">Entry</option><option ${S.prefs.cpuTier===2?'selected':''} value="2">Mainstream</option><option ${S.prefs.cpuTier===3?'selected':''} value="3">Strong</option><option ${S.prefs.cpuTier===4?'selected':''} value="4">High-end</option></select></div>
+   <div class="settingrow"><span>Require games to fit my PC</span><label class="switch"><input type="checkbox" ${S.prefs.useSpecs===false?'':'checked'} onchange="setPref('useSpecs',this.checked)"><span></span></label></div>
+ </div>
+ <div class="panel"><h3>Recommendation taste</h3><p class="muted">These affect the games GamerGuy puts in your recommendations.</p><label>Preferred genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip ${S.prefs.preferredGenres.includes(g)?'on':''}" onclick="togglePrefGenre('preferredGenres','${g}')">${g}</button>`).join('')}</div><label>Avoid genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip dangerchip ${S.prefs.avoidGenres.includes(g)?'on':''}" onclick="togglePrefGenre('avoidGenres','${g}')">${g}</button>`).join('')}</div><div class="settingrow"><span>Minimum Metacritic score</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minScore}" onchange="setPref('minScore',Number(this.value)||0)"></div><div class="settingrow"><span>Hide games with bad Steam reviews</span><label class="switch"><input type="checkbox" ${S.prefs.hideBad?'checked':''} onchange="setPref('hideBad',this.checked)"><span></span></label></div><div class="settingrow"><span>Minimum Steam positive %</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minSteamPositive}" onchange="setPref('minSteamPositive',Number(this.value)||0)"></div><div class="checks"><label><input type="checkbox" ${S.prefs.preferSingle?'checked':''} onchange="setPref('preferSingle',this.checked)"> Prefer single-player</label><label><input type="checkbox" ${S.prefs.preferIndie?'checked':''} onchange="setPref('preferIndie',this.checked)"> Prefer indie</label><label><input type="checkbox" ${S.prefs.avoidEarly?'checked':''} onchange="setPref('avoidEarly',this.checked)"> Avoid Early Access</label></div></div>
+ <div class="panel"><h3>Price & region</h3><p class="muted">Steam prices are requested for your selected country.</p><label>Store region</label><select class="num" style="width:100%" onchange="setRegion(this.value)">${regions.map(r=>`<option value="${r[0]}" ${S.prefs.region===r[0]?'selected':''}>${r[2]} · ${r[1]}</option>`).join('')}</select><div class="settingrow"><span>Maximum price</span><input class="num" type="number" min="0" value="${S.prefs.maxPrice>=100?'':S.prefs.maxPrice}" placeholder="No limit" onchange="setPref('maxPrice',this.value===''?100:Number(this.value))"></div><div class="settingrow"><span>Free-to-play only</span><label class="switch"><input type="checkbox" ${S.prefs.freeOnly?'checked':''} onchange="setPref('freeOnly',this.checked)"><span></span></label></div></div>
+ <div class="panel"><h3>Wishlist & notifications</h3><div class="settingrow"><span>Auto-watch sales</span><label class="switch"><input type="checkbox" ${S.prefs.autoWatchSale?'checked':''} onchange="setPref('autoWatchSale',this.checked)"><span></span></label></div><div class="settingrow"><span>Auto-watch updates</span><label class="switch"><input type="checkbox" ${S.prefs.autoWatchUpdate?'checked':''} onchange="setPref('autoWatchUpdate',this.checked)"><span></span></label></div><div class="settingrow"><span>Sale notifications</span><label class="switch"><input type="checkbox" ${S.prefs.notifySale?'checked':''} onchange="setPref('notifySale',this.checked)"><span></span></label></div><div class="settingrow"><span>Update notifications</span><label class="switch"><input type="checkbox" ${S.prefs.notifyUpdate?'checked':''} onchange="setPref('notifyUpdate',this.checked)"><span></span></label></div></div>
+ <div class="panel"><h3>Reset</h3><p class="muted">Local settings, owned games, hidden games, ratings and browsing history are stored in this browser.</p><div class="actions"><button class="btn" onclick="resetTaste()">Reset recommendation taste</button><button class="btn" onclick="clearHistory()">Clear browsing history</button></div></div>
+ </div></section>`;
+}
+function discover(){
+ const genres=['Horror','Survival Horror','Story Rich','Indie','Action','Adventure','RPG','Co-op','Multiplayer','Single-player','Survival','Strategy','Simulation','Casual'];
+ const visible=S.apps.filter(ggMatches);
+ const sorted=[...visible].sort((a,b)=>{
+   if(S.q){
+     const rb=searchRank(b.name,S.q),ra=searchRank(a.name,S.q);
+     if(rb!==ra)return rb-ra;
+   }
+   const sb=ggScore(b),sa=ggScore(a);
+   if(sb!==sa)return sb-sa;
+   return (b._searchScore||0)-(a._searchScore||0);
+ });
+ const top=sorted.slice(0,10);
+ const hasQuery=!!S.q;
+ const title=hasQuery?`Results for “${esc(S.q)}”`:(S.selectedGenres.length?`Matching your filters`:'Discover games');
+ const subtitle=S.selectedGenres.length?`Every selected genre must match.`:'Search by title or combine genres to narrow the results.';
+ if(!S.loading && !S.filterBusy && !S.apps.length){
+   setTimeout(()=>{ if(!S.loading && !S.apps.length) load().catch(()=>{}); },50);
+ }
+ if(S.selectedGenres.length && !S.filterBusy && !S._genreHydrated){
+   S._genreHydrated=true;
+   setTimeout(()=>ensureGenres().catch(e=>{console.warn(e);S.filterBusy=false;render()}),40);
+ }
+ setTimeout(()=>hydrate(sorted.slice(0,40).map(a=>a.steam_app_id)).catch(()=>{}),30);
+ return `<section>
+   <div class="head compact"><div><h2>${title}</h2><p>${subtitle}</p></div><div class="status ${!S.loading?'ok':''}"><i></i>${S.loading?'Loading Steam games…':`${visible.length.toLocaleString()} matching`}</div></div>
+   <div class="searchtools">
+     <div class="filterbar"><div><b>Genres</b><span class="filterhint">Select multiple</span></div><div class="actions"><button class="btn" onclick="clearFilters()">Clear</button></div></div>
+     <div class="chips">${genres.map(g=>`<button class="chip ${S.selectedGenres.includes(g)?'on':''}" onclick="toggleGenre('${esc(g)}')">${esc(g)}</button>`).join('')}</div>
+     ${S.selectedGenres.length?`<div class="queryline" style="margin-top:10px">Active: ${S.selectedGenres.map(g=>`<span class="querypill">${esc(g)} <button onclick="toggleGenre('${esc(g)}')">${ggIcon('close')}</button></span>`).join(' ')}</div>`:''}
+   </div>
+   <section class="section"><div class="head"><div><h2>${hasQuery?'Search results':'Top matches'}</h2><p>${S.selectedGenres.length?'Filtered by all selected genres.':'Games ranked by GamerGuy score and relevance.'}</p></div></div>
+   ${S.filterBusy?'<div class="empty">Finding games that match your genres…</div>':top.length?`<div class="grid">${top.map((a,i)=>card(a,i+1)).join('')}</div>`:'<div class="empty">No games match those filters yet. Try removing a genre or searching another title.</div>'}
+   </section>
+   <div class="bar"><span>${S.more?'More Steam games available':'End of the currently loaded catalog'}</span><button class="btn" onclick="loadMore()">${S.loading?'Loading…':'Load more'}</button></div>
+ </section>`;
+}
+function render(){
+ if(S.page==='game'){return}
+ const html=S.page==='home'?home():S.page==='discover'?discover():S.page==='lists'?lists():S.page==='wishlist'?wishlist():S.page==='alerts'?alerts():settings();
+ $('#view').innerHTML=html;
+ document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('on',b.dataset.page===S.page));
+}
+function focusQ(){$('#q').focus()}
+function clearSearch(){S.q='';$('#q').value='';nav('discover')}
+function clearFilters(){S.selectedGenres=[];save();render()}
+function toggleGenre(g){S.selectedGenres=S.selectedGenres.includes(g)?S.selectedGenres.filter(x=>x!==g):[...S.selectedGenres,g];save();render();ensureGenres()}
+function wish(id){
+ const add=!S.wish.includes(id);
+ if(add){S.wish=[...S.wish,id];if(S.prefs.autoWatchSale||S.prefs.autoWatchUpdate)S.watch[id]={sale:null,update:S.prefs.autoWatchUpdate,lastNews:null};toast('Added to wishlist')}
+ else{S.wish=S.wish.filter(x=>x!==id);delete S.watch[id];toast('Removed from wishlist')}
+ save();render();
+}
+function toggleWatch(id){if(S.watch[id])delete S.watch[id];else S.watch[id]={sale:null,update:S.prefs.autoWatchUpdate,lastNews:null};save();toast(S.watch[id]?'Alerts enabled':'Alerts disabled');if(S.page==='game')loadGame(id);else render()}
+function hideGame(id){S.hidden.add(id);S.wish=S.wish.filter(x=>x!==id);delete S.watch[id];save();toast('Game hidden from GamerGuy');goBack()}
+function markOwned(id){S.owned.add(id);save();toast('Marked as owned — it will remain in search results but leave recommendations');if(S.page==='game')loadGame(id);else render()}
+function rate(id,n){S.ratings[id]=n;save();toast(`Your rating: ${n}/5`);if(S.page==='game')loadGame(id);else render()}
+function setPref(k,v){S.prefs[k]=v;save();render()}
+function setRegion(v){S.prefs.region=v;S.details.clear();save();toast('Store region changed — refreshing prices');render();hydrate(S.apps.slice(0,30).map(a=>a.steam_app_id))}
+function togglePrefGenre(group,g){S.prefs[group]=S.prefs[group].includes(g)?S.prefs[group].filter(x=>x!==g):[...S.prefs[group],g];save();render()}
+function resetTaste(){S.prefs.preferredGenres=[];S.prefs.avoidGenres=[];S.prefs.maxPrice=100;S.prefs.minScore=0;S.prefs.minSteamPositive=0;S.prefs.hideBad=false;S.prefs.useSpecs=true;S.prefs.preferSingle=false;S.prefs.preferIndie=false;S.prefs.avoidEarly=false;S.prefs.freeOnly=false;save();render();toast('Recommendation settings reset')}
+function clearHistory(){S.viewed=[];save();render();toast('Browsing history cleared')}
+function newList(){const n=prompt('List name:','My Games');if(!n)return;if(!S.lists[n])S.lists[n]=[];save();render()}
+function add(id){const names=Object.keys(S.lists);const n=prompt(names.length?`Add to which list? ${names.join(', ')}`:'Create a list first:','My Games');if(!n)return;if(!S.lists[n])S.lists[n]=[];if(!S.lists[n].includes(id))S.lists[n].push(id);save();toast('Added to list');}
+async function notifyPermission(){if(!('Notification'in window)){toast('Browser notifications are not supported here');return}const p=await Notification.requestPermission();toast(p==='granted'?'Browser alerts enabled':'Notification permission not granted')}
+async function check(){if(!Object.keys(S.watch).length)return;for(const id of Object.keys(S.watch)){const d=await info(+id),w=S.watch[id];if(!d)continue;const now=d.price_overview?.discount_percent||0;if(S.prefs.notifySale&&w.sale!==null&&now>w.sale&&Notification.permission==='granted')new Notification(d.name,{body:`Now ${now}% off on Steam.`});w.sale=now;const ns=await news(+id),newest=ns[0]?.gid||null;if(S.prefs.notifyUpdate&&w.lastNews&&newest&&newest!==w.lastNews&&Notification.permission==='granted')new Notification(d.name,{body:'New Steam update/news activity detected.'});if(newest)w.lastNews=newest}save()}
+let searchTimer;
+$('#q')?.addEventListener('input',e=>{S.q=e.target.value.trim();clearTimeout(searchTimer);searchTimer=setTimeout(()=>S.q?ensureSearch():render(),250)});
+document.addEventListener('click',e=>{
+ const wishBtn=e.target.closest('[data-wish-id]');
+ if(wishBtn){
+   e.preventDefault(); e.stopPropagation();
+   wish(Number(wishBtn.dataset.wishId));
+ }
+});
+document.addEventListener('keydown',e=>{
+ const game=e.target.closest?.('[data-game-id]');
+ if(game && (e.key==='Enter'||e.key===' ')){
+   e.preventDefault();
+   openGame(Number(game.dataset.gameId));
+ }
+});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){e.preventDefault();nav(b.dataset.page)}});
+if($('#bell')) $('#bell').onclick=()=>nav('alerts'); if($('#my')) $('#my').onclick=()=>nav('lists');
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('#q')?.focus()}});
+$('#x')?.addEventListener('click',goBack);
+$('#mx')?.addEventListener('click',()=>$('#modal').classList.remove('show'));
+function routeHash(){
+ const hash=location.hash;
+ if(hash.startsWith('#game-')){
+   const id=Number(hash.slice(6));
+   if(Number.isFinite(id)){
+     S.page='game';S.gameId=id;renderGameLoading();loadGame(id);
+     return;
+   }
+ }
+ const p=hash.slice(1)||'home';
+ S.page=['home','discover','lists','wishlist','alerts','settings'].includes(p)?p:'home';
+ S.gameId=null;
+ render();
+}
+window.addEventListener('hashchange',routeHash);
+window.addEventListener('popstate',()=>{if(location.hash.startsWith('#game-')){S.page='game';S.gameId=Number(location.hash.slice(6));renderGameLoading();loadGame(S.gameId)}else{S.page=(location.hash.slice(1)||'home');if(!['home','discover','lists','wishlist','alerts','settings'].includes(S.page))S.page='home';render()}});
+window.refreshRecommendations=refreshRecommendations;window.nav=nav;window.focusQ=focusQ;window.loadMore=loadMore;window.clearSearch=clearSearch;window.clearFilters=clearFilters;window.toggleGenre=toggleGenre;window.openGame=openGame;window.goBack=goBack;window.wish=wish;window.toggleWatch=toggleWatch;window.hideGame=hideGame;window.markOwned=markOwned;window.rate=rate;window.setPref=setPref;window.setRegion=setRegion;window.togglePrefGenre=togglePrefGenre;window.resetTaste=resetTaste;window.clearHistory=clearHistory;window.newList=newList;window.add=add;window.notifyPermission=notifyPermission;
+
+async function bootGamerGuy(){
+ try{ render(); }catch(e){ console.error('Initial render failed',e); const v=$('#view'); if(v) v.innerHTML=`<section class="hero"><div class="eyebrow">GAMERGUY</div><h1>GamerGuy could not start.</h1><p>${esc(e?.message||e)}</p><div class="actions"><button class="btn primary" onclick="localStorage.clear();location.reload()">Reset GamerGuy</button></div></section>`; return; }
+ try{ await load(); }
+ catch(e){ console.error('Steam catalog load failed',e); const st=$('#status'); if(st) st.textContent='Steam temporarily unavailable'; toast('Steam is temporarily unavailable. You can still use saved games and settings.'); }
+}
+
+bootGamerGuy().then(async()=>{try{await refreshRecommendations()}catch(e){console.warn(e)} if(location.hash.startsWith('#game-'))routeHash()}); setInterval(()=>{try{check()}catch(e){console.warn(e)}},15*60*1000);
+</script></body></html>function preloadImages(ids){
+  for(const id of ids){
+    const d=detail(id);
+    const url=d?.header_image||imageUrl(id);
+    if(!url)continue;
+    const im=new Image();
+    im.decoding='async';
+    im.src=url;
+  }
+}
