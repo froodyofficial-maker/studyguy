@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GamerGuy — Find Your Horror Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="noise"></div>
+<header class="nav">
+  <a class="brand" href="#"><span class="brand-mark">G</span><span>Gamer<span>Guy</span></span></a>
+  <nav><a href="#discover">Discover</a><a href="#games">Games</a><a href="#how">How it works</a></nav>
+  <button class="nav-search" id="knownSearch">⌕ Search a game</button>
+</header>
+
+<main>
+<section class="hero" id="discover">
+  <div class="hero-glow"></div>
+  <div class="hero-copy">
+    <div class="eyebrow">HORROR GAME DISCOVERY</div>
+    <h1>Find the horror<br><em>you actually want.</em></h1>
+    <p>Tell GamerGuy what scares you. We'll match your taste with horror games worth playing.</p>
+    <div class="hero-actions">
+      <button class="primary" id="findBtn">Find my game <span>→</span></button>
+      <button class="secondary" id="knownSearch2">I know a game</button>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="mini-label">GAMERGUY MATCH</div>
+    <div class="match-ring"><strong>94</strong><span>%</span></div>
+    <h3>Alien: Isolation</h3>
+    <p>Heavy atmosphere · Survival · Psychological</p>
+    <div class="bar"><i style="width:94%"></i></div>
+    <small>Based on your preferences</small>
+  </div>
+</section>
+
+<section class="section" id="games">
+  <div class="section-head"><div><div class="eyebrow">EXPLORE</div><h2>Horror, your way.</h2></div><button class="text-btn" id="knownSearch3">Search all games →</button></div>
+  <div class="game-grid" id="featured"></div>
+</section>
+
+<section class="how" id="how">
+  <div class="eyebrow">HOW IT WORKS</div><h2>Less scrolling.<br>More screaming.</h2>
+  <div class="steps">
+    <div><b>01</b><h3>Pick your tags</h3><p>Choose what you want more — or less — of.</p></div>
+    <div><b>02</b><h3>Get matched</h3><p>GamerGuy scores games against your preferences.</p></div>
+    <div><b>03</b><h3>Play</h3><p>Explore the game, then jump to Steam when you're ready.</p></div>
+  </div>
+</section>
+</main>
+
+<div class="modal hidden" id="modal">
+  <div class="backdrop"></div>
+  <div class="dialog">
+    <button class="close" id="close">×</button>
+    <div class="eyebrow">GAMERGUY MATCHMAKER</div>
+    <h2 id="modalTitle">What are you looking for?</h2>
+    <p id="modalSub">Pick as many as you want. We'll do the rest.</p>
+    <div class="tag-grid" id="tagGrid"></div>
+    <div class="dialog-bottom"><span id="selectedCount">0 selected</span><button class="primary" id="matchBtn">Find my matches →</button></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="searchModal">
+  <div class="backdrop"></div>
+  <div class="dialog search-dialog">
+    <button class="close" id="closeSearch">×</button>
+    <div class="eyebrow">GAME DATABASE</div><h2>Know what you're looking for?</h2>
+    <div class="searchbox"><span>⌕</span><input id="searchInput" placeholder="Search a game..." autofocus></div>
+    <div id="searchResults" class="search-results"></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="resultsModal">
+  <div class="backdrop"></div>
+  <div class="dialog results-dialog">
+    <button class="close" id="closeResults">×</button>
+    <div class="eyebrow">YOUR RESULTS</div><h2>Games picked for you.</h2>
+    <p id="resultSummary"></p>
+    <div id="results" class="results"></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="gameModal">
+  <div class="backdrop"></div>
+  <div class="dialog game-dialog">
+    <button class="close" id="closeGame">×</button>
+    <div id="gameDetail"></div>
+  </div>
+</div>
+
+<footer><span>© 2026 GamerGuy</span><span>Built for horror fans.</span></footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+[
+  {
+    "id": 418370,
+    "name": "Resident Evil 7 Biohazard",
+    "description": "A first-person survival horror experience set in the mysterious Baker estate.",
+    "tags": [
+      "Survival Horror",
+      "Atmosphere",
+      "Gore",
+      "Action",
+      "Psychological Horror",
+      "Puzzles"
+    ],
+    "scores": {
+      "gore": 9,
+      "psychological": 8,
+      "atmosphere": 10,
+      "action": 7,
+      "jumpscares": 7,
+      "puzzles": 6,
+      "supernatural": 6
+    },
+    "steam": "https://store.steampowered.com/app/418370/RESIDENT_EVIL_7_biohazard/"
+  },
+  {
+    "id": 883710,
+    "name": "Resident Evil 2",
+    "description": "A modern survival horror classic rebuilt around the Raccoon City police station and its terrifying secrets.",
+    "tags": [
+      "Survival Horror",
+      "Gore",
+      "Action",
+      "Atmosphere",
+      "Puzzles"
+    ],
+    "scores": {
+      "gore": 8,
+      "psychological": 6,
+      "atmosphere": 9,
+      "action": 8,
+      "jumpscares": 6,
+      "puzzles": 7,
+      "supernatural": 5
+    },
+    "steam": "https://store.steampowered.com/app/883710/RESIDENT_EVIL_2/"
+  },
+  {
+    "id": 310790,
+    "name": "Outlast",
+    "description": "Investigate an abandoned asylum where something has gone horribly wrong. Running is usually your best option.",
+    "tags": [
+      "Psychological Horror",
+      "Jumpscares",
+      "Atmosphere",
+      "Gore",
+      "Survival Horror"
+    ],
+    "scores": {
+      "gore": 9,
+      "psychological": 9,
+      "atmosphere": 10,
+      "action": 2,
+      "jumpscares": 10,
+      "puzzles": 6,
+      "supernatural": 7
+    },
+    "steam": "https://store.steampowered.com/app/238320/Outlast/"
+  },
+  {
+    "id": 239140,
+    "name": "Alien: Isolation",
+    "description": "Survive aboard a failing space station while a relentless alien hunts you through the shadows.",
+    "tags": [
+      "Atmosphere",
+      "Survival Horror",
+      "Psychological Horror",
+      "Action",
+      "Stealth"
+    ],
+    "scores": {
+      "gore": 6,
+      "psychological": 8,
+      "atmosphere": 10,
+      "action": 5,
+      "jumpscares": 7,
+      "puzzles": 6,
+      "supernatural": 1
+    },
+    "steam": "https://store.steampowered.com/app/214490/Alien_Isolation/"
+  },
+  {
+    "id": 1943950,
+    "name": "Escape the Backrooms",
+    "description": "Explore eerie liminal spaces and survive strange entities with friends.",
+    "tags": [
+      "Atmosphere",
+      "Jumpscares",
+      "Co-op",
+      "Psychological Horror",
+      "Survival Horror"
+    ],
+    "scores": {
+      "gore": 3,
+      "psychological": 8,
+      "atmosphere": 10,
+      "action": 2,
+      "jumpscares": 8,
+      "puzzles": 7,
+      "supernatural": 9
+    },
+    "steam": "https://store.steampowered.com/app/1943950/Escape_the_Backrooms/"
+  },
+  {
+    "id": 945360,
+    "name": "Amnesia: The Dark Descent",
+    "description": "A tense first-person horror adventure focused on exploration, puzzles and helplessness.",
+    "tags": [
+      "Psychological Horror",
+      "Atmosphere",
+      "Puzzles",
+      "Survival Horror",
+      "Supernatural"
+    ],
+    "scores": {
+      "gore": 5,
+      "psychological": 10,
+      "atmosphere": 10,
+      "action": 1,
+      "jumpscares": 6,
+      "puzzles": 9,
+      "supernatural": 9
+    },
+    "steam": "https://store.steampowered.com/app/57300/Amnesia_The_Dark_Descent/"
+  },
+  {
+    "id": 400,
+    "name": "Portal 2",
+    "description": "A puzzle adventure rather than a horror game, included as a test of GamerGuy's genre filtering.",
+    "tags": [
+      "Puzzles",
+      "Comedy"
+    ],
+    "scores": {
+      "gore": 0,
+      "psychological": 2,
+      "atmosphere": 5,
+      "action": 1,
+      "jumpscares": 0,
+      "puzzles": 10,
+      "supernatural": 0
+    },
+    "steam": "https://store.steampowered.com/app/620/Portal_2/"
+  }
+]
