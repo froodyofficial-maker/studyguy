@@ -135,6 +135,8 @@
 .screen-modal img{max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 25px 90px #000b;border-radius:8px}
 .screen-close{position:absolute;right:22px;top:18px;border:1px solid #363e4b;background:#121722;color:#fff;border-radius:10px;padding:9px 12px;z-index:2}
 @media(max-width:800px){.gamegallery{grid-template-columns:repeat(2,minmax(0,1fr))}.search-settings-row{align-items:flex-start;flex-direction:column}}
+
+.gamecard.trilogy-card{background:#0e241a;border-color:#2f8b5e}.gamecard.trilogy-card:hover{border-color:#48c47e}.seriesbadge{position:absolute;left:10px;top:10px;padding:5px 8px;border-radius:7px;background:#1d7748;color:#d9ffe8;font-size:10px;font-weight:900;border:1px solid #42b875;z-index:4}.dlc-label{display:inline-block;background:#6f4dcc;color:#fff;padding:5px 8px;border-radius:7px;font-size:10px;font-weight:900;letter-spacing:.5px;margin-bottom:8px}.dlcbadge{position:absolute;top:10px;right:10px;z-index:4;background:#6f4dcc;color:#fff;padding:5px 8px;border-radius:7px;font-size:10px;font-weight:900;letter-spacing:.5px;box-shadow:0 5px 16px #0008}.search-settings-row{display:flex;gap:14px;align-items:center;margin-top:13px;padding-top:13px;border-top:1px solid var(--line);flex-wrap:wrap}
 </style></head><body>
 <div class="app"><aside class="side"><div class="logo"><div class="mark"><svg class="ico" viewBox="0 0 24 24"><path d="M7 14l-2 3a2.8 2.8 0 0 0 4.8 2.8l1.4-2h2.6l1.4 2A2.8 2.8 0 0 0 20 17l-2-3"/><path d="M7 14a5 5 0 0 1 10 0M8 10V7m-1.5 1.5h3M15.5 9.5h.01M18 8h.01"/></svg></div>GamerGuy</div><nav class="nav">
 <button class="on" data-page="home"><svg class="ico" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-6h6v6"/></svg>Home</button>
@@ -193,12 +195,12 @@ const S={
  q:'',apps:[],map:new Map(),cursor:0,more:true,loading:false,details:new Map(),reviews:new Map(),reviewSummaries:new Map(),reviewLists:new Map(),
  viewed:read('ggViewed',[]),wish:read('ggWish',[]),lists:read('ggLists',{}),watch:read('ggWatch',{}),
  hidden:new Set(read('ggHidden',[])),owned:new Set(read('ggOwned',[])),ratings:read('ggRatings',{}),discountHistory:read('ggDiscountHistory',{}),
- selectedGenres:read('ggSelectedGenres',[]),filterBusy:false,loadMoreBusy:false,recBusy:false,recs:[],
+ selectedGenres:read('ggSelectedGenres',[]),filterBusy:false,loadMoreBusy:false,recBusy:false,recs:[],displayCount:10,
  prefs:Object.assign({
  preferredGenres:[],avoidGenres:[],maxPrice:100,minScore:0,minSteamPositive:0,hideBad:false,
  preferSingle:false,preferIndie:false,avoidEarly:false,freeOnly:false,
  notifySale:true,notifyUpdate:true,autoWatchSale:true,autoWatchUpdate:true,
- region:'IN',currency:'INR',ramGB:16,gpuTier:2,cpuTier:2,useSpecs:true,searchSort:'relevance',minReviews:0
+ region:'IN',currency:'INR',ramGB:16,gpuTier:2,cpuTier:2,useSpecs:true,searchSort:'relevance',minReviews:0,minRecScore:0,minRecReviews:0
  },read('ggPrefs',{}))
 };
 /* Normalize old localStorage from previous GamerGuy versions. */
@@ -206,7 +208,7 @@ const S={
   const arrKeys=['viewed','wish','selectedGenres'];
   for(const k of arrKeys) if(!Array.isArray(S[k])) S[k]=[];
   for(const k of ['preferredGenres','avoidGenres']) if(!Array.isArray(S.prefs[k])) S.prefs[k]=[];
-  for(const k of ['maxPrice','minScore','minSteamPositive','minReviews']){ const n=Number(S.prefs[k]); S.prefs[k]=Number.isFinite(n)?n:0; }
+  for(const k of ['maxPrice','minScore','minSteamPositive','minReviews','minRecReviews']){ const n=Number(S.prefs[k]); S.prefs[k]=Number.isFinite(n)?n:0; }
   for(const k of ['hideBad','preferSingle','preferIndie','avoidEarly','freeOnly','notifySale','notifyUpdate','autoWatchSale','autoWatchUpdate','useSpecs']) S.prefs[k]=S.prefs[k]===true;
   if(!S.prefs.region) S.prefs.region='IN';
 })();
@@ -439,6 +441,9 @@ async function buildTastePool(){
         const r=reviewStats(d,id);
         if(r.positive!==null&&r.positive<S.prefs.minSteamPositive)return false;
       }
+      const rr=reviewStats(d,id);
+      if((S.prefs.minRecScore||0)>0&&(scoreInfo(a0).combined10??0)<Number(S.prefs.minRecScore))return false;
+      if((S.prefs.minRecReviews||0)>0&&rr.total<Number(S.prefs.minRecReviews))return false;
       if(S.prefs.avoidEarly&&d.is_early_access)return false;
       /* PC specs inform compatibility, but never hide games. */
       return true;
@@ -477,15 +482,9 @@ async function buildTastePool(){
   return [...new Map(bands.map(a0=>[a0.steam_app_id,a0])).values()].slice(0,10);
 }
 const CURATED_SERIES={
- granny:{
-   label:'Granny Trilogy',
-   ids:[962400,1205040,1707550],
-   names:{
-     962400:'Granny',
-     1205040:'Granny: Chapter Two',
-     1707550:'Granny 3'
-   }
- }
+ granny:{label:'Granny',ids:[962400,1205040,1707550],names:{962400:'Granny',1205040:'Granny: Chapter Two',1707550:'Granny 3'}},
+ residentevil:{label:'Resident Evil',ids:[883710,952060,2050650],names:{883710:'Resident Evil 2',952060:'Resident Evil 3',2050650:'Resident Evil 4'}},
+ outlast:{label:'Outlast',ids:[238320,414700,1304930],names:{238320:'Outlast',414700:'Outlast 2',1304930:'The Outlast Trials'}}
 };
 function seriesForQuery(term){
  const q=String(term||'').toLowerCase().trim();
@@ -495,7 +494,7 @@ function seriesMeta(id,term){
  const s=seriesForQuery(term);
  return s&&s.ids.includes(Number(id))?{label:s.label,index:s.ids.indexOf(Number(id))+1}:null;
 }
-const SEARCH_ALIASES=[
+const SEARCH_ALIASES=[{terms:['outlast','outlast 2','outlast trials'],ids:[238320,414700,1304930],names:{238320:'Outlast',414700:'Outlast 2',1304930:'The Outlast Trials'}},
  {terms:['granny','granny trilogy','granny games'],ids:[962400,1205040,1707550],names:{962400:'Granny',1205040:'Granny: Chapter Two',1707550:'Granny 3'}},
 
  {terms:['resident evil 4 remake','re4 remake','biohazard re4','biohazard 4','resident evil 4'],ids:[2050650],names:{2050650:'Resident Evil 4'}},
@@ -585,22 +584,35 @@ async function storeSearch(term){
 async function exactSearch(term){
   const q=String(term||'').trim();
   let rows=await storeSearch(q);
-  // Hydrate enough metadata to support review-count filters and scores.
   await hydrate([...new Set(rows.map(x=>x.steam_app_id))].slice(0,60));
-  // Add curated series metadata before sorting.
   rows=rows.map(x=>Object.assign(x,{_series:seriesMeta(x.steam_app_id,q)}));
-  return sortSearchResults(rows,q);
+  const minReviews=Math.max(0,Number(S.prefs.minReviews)||0);
+  rows=rows.filter(x=>{
+    const d=detail(x.steam_app_id);
+    return !minReviews || reviewStats(d,x.steam_app_id).total>=minReviews;
+  });
+  const series=seriesForQuery(q);
+  return rows.sort((a,b)=>{
+    if(series){
+      const ai=series.ids.indexOf(a.steam_app_id),bi=series.ids.indexOf(b.steam_app_id);
+      if(ai!==-1||bi!==-1){if(ai===-1)return 1;if(bi===-1)return -1;if(ai!==bi)return ai-bi;}
+    }
+    if(S.prefs.searchSort==='score')return ggScore(b)-ggScore(a);
+    if(S.prefs.searchSort==='reviews')return reviewStats(detail(b.steam_app_id),b.steam_app_id).total-reviewStats(detail(a.steam_app_id),a.steam_app_id).total;
+    if(S.prefs.searchSort==='price')return (detail(a.steam_app_id)?.price_overview?.final||999999999)-(detail(b.steam_app_id)?.price_overview?.final||999999999);
+    return searchRank(b.name,q)-searchRank(a.name,q);
+  }).slice(0,80);
 }
 function card(a,n){
  const id=a.steam_app_id,d=detail(id),si=scoreInfo(a),saved=S.wish.includes(id);
  const primary=d?.header_image||a.tiny_image||`https://cdn.cloudflare.steamstatic.com/steam/apps/${id}/header.jpg`;
  const fallbacks=imageFallbacks(id,'poster',[d?.header_image,a.tiny_image]);
  const price=d?priceText(d):'Loading price…';
- return `<a class="gamecard" data-game-id="${id}" href="#game-${id}" aria-label="Open ${esc(a.name)}">
+ return `<a class="gamecard ${a._series?"trilogy-card":""}" data-game-id="${id}" href="#game-${id}" aria-label="Open ${esc(a.name)}">
    <div class="gameposter">
      <img loading="lazy" src="${esc(primary)}" data-fallbacks="${esc(fallbacks.join('|'))}" data-fi="1"
        onerror="imgNext(this)" alt="${esc(a.name)}">
-     ${n?`<span class="rank">#${n}</span>`:''}${a._series?`<span class="seriesbadge">${esc(a._series.label)} · ${a._series.index}/3</span>`:''}
+     ${n?`<span class="rank">#${n}</span>`:''}${a._series?`<span class="seriesbadge">TRILOGY</span>`:''}${d?.type==='dlc'?`<span class="dlcbadge">DLC</span>`:''}
      <button type="button" class="save ${saved?'saved':''}" data-wish-id="${id}" aria-label="${saved?'Remove from wishlist':'Add to wishlist'}">${ggIcon('star')}</button>
      <div class="posterfade"></div>
    </div>
@@ -701,27 +713,12 @@ async function loadMore(){
  if(S.loading||S.loadMoreBusy)return;
  S.loadMoreBusy=true;
  try{
-   let added=0,pages=0;
-   const targetQuery=!!S.q;
-   while(S.more && pages<3 && (!targetQuery || added<20)){
-     const before=S.apps.length;
-     await load();
-     pages++;
-     if(targetQuery){
-       added += S.apps.slice(before).filter(a0=>a0.name.toLowerCase().includes(S.q.toLowerCase())).length;
-     }else{
-       added += S.apps.length-before;
-     }
-   }
+   S.displayCount+=10;
+   if(S.apps.filter(ggMatches).length<S.displayCount+10 && S.more) await load();
    if(S.selectedGenres.length) await ensureGenres({skipInitialRender:true});
    render();
-   if(!S.more)toast('You reached the end of the currently available Steam catalog.');
- }catch(e){
-   toast(e.message||'Could not load more games');
- }finally{
-   S.loadMoreBusy=false;
-   render();
- }
+ }catch(e){toast(e.message||'Could not load more games')}
+ finally{S.loadMoreBusy=false;render()}
 }
 function nav(p){
  const allowed=['home','discover','lists','wishlist','alerts','settings'];
@@ -886,6 +883,7 @@ function renderGame(a,d,rv,nw){
    </div>
 
    <div class="gamepagehead">
+     ${d?.type==='dlc'?'<div class="type-label dlc-label">DLC</div>':''}
      <h1>${esc(d.name)}</h1>
      <div class="muted">${esc((d.developers||[]).join(', '))}${d.release_date?.date?' · '+esc(d.release_date.date):''}</div>
      <div class="genrechips">${genres.map(g=>`<span class="genrechip">${esc(g)}</span>`).join('')}</div>
@@ -1012,7 +1010,7 @@ function settings(){
    <div class="settingrow"><span>Show all games</span><b style="color:#73e6b0">Enabled</b></div>
    <p class="muted" style="margin-top:10px;font-size:11px">GamerGuy will never hide a game because of your hardware. It will show whether the game should run well on your PC.</p>
  </div>
- <div class="panel"><h3>Recommendation taste</h3><p class="muted">These affect the games GamerGuy puts in your recommendations.</p><label>Preferred genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip ${S.prefs.preferredGenres.includes(g)?'on':''}" onclick="togglePrefGenre('preferredGenres','${g}')">${g}</button>`).join('')}</div><label>Avoid genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip dangerchip ${S.prefs.avoidGenres.includes(g)?'on':''}" onclick="togglePrefGenre('avoidGenres','${g}')">${g}</button>`).join('')}</div><div class="settingrow"><span>Minimum Metacritic score</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minScore}" onchange="setPref('minScore',Number(this.value)||0)"></div><div class="settingrow"><span>Hide games with bad Steam reviews</span><label class="switch"><input type="checkbox" ${S.prefs.hideBad?'checked':''} onchange="setPref('hideBad',this.checked)"><span></span></label></div><div class="settingrow"><span>Minimum Steam positive %</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minSteamPositive}" onchange="setPref('minSteamPositive',Number(this.value)||0)"></div><div class="checks"><label><input type="checkbox" ${S.prefs.preferSingle?'checked':''} onchange="setPref('preferSingle',this.checked)"> Prefer single-player</label><label><input type="checkbox" ${S.prefs.preferIndie?'checked':''} onchange="setPref('preferIndie',this.checked)"> Prefer indie</label><label><input type="checkbox" ${S.prefs.avoidEarly?'checked':''} onchange="setPref('avoidEarly',this.checked)"> Avoid Early Access</label></div></div>
+ <div class="panel"><h3>Recommendation taste</h3><p class="muted">These affect the games GamerGuy puts in your recommendations.</p><label>Preferred genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip ${S.prefs.preferredGenres.includes(g)?'on':''}" onclick="togglePrefGenre('preferredGenres','${g}')">${g}</button>`).join('')}</div><label>Avoid genres</label><div class="chips smallchips">${G.map(g=>`<button class="chip dangerchip ${S.prefs.avoidGenres.includes(g)?'on':''}" onclick="togglePrefGenre('avoidGenres','${g}')">${g}</button>`).join('')}</div><div class="settingrow"><span>Minimum Metacritic score</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minScore}" onchange="setPref('minScore',Number(this.value)||0)"></div><div class="settingrow"><span>Hide games with bad Steam reviews</span><label class="switch"><input type="checkbox" ${S.prefs.hideBad?'checked':''} onchange="setPref('hideBad',this.checked)"><span></span></label></div><div class="settingrow"><span>Minimum Steam positive %</span><input class="num" type="number" min="0" max="100" value="${S.prefs.minSteamPositive}" onchange="setPref('minSteamPositive',Number(this.value)||0)"></div><div class="settingrow"><span>Minimum recommendation score</span><input class="num" type="number" min="0" max="10" step="0.1" value="${S.prefs.minRecScore||0}" onchange="setPref('minRecScore',Number(this.value)||0)"></div><div class="settingrow"><span>Minimum recommendation reviews</span><input class="num" type="number" min="0" step="100" value="${S.prefs.minRecReviews||0}" onchange="setPref('minRecReviews',Number(this.value)||0)"></div><div class="checks"><label><input type="checkbox" ${S.prefs.preferSingle?'checked':''} onchange="setPref('preferSingle',this.checked)"> Prefer single-player</label><label><input type="checkbox" ${S.prefs.preferIndie?'checked':''} onchange="setPref('preferIndie',this.checked)"> Prefer indie</label><label><input type="checkbox" ${S.prefs.avoidEarly?'checked':''} onchange="setPref('avoidEarly',this.checked)"> Avoid Early Access</label></div></div>
  <div class="panel"><h3>Price & region</h3><p class="muted">Steam prices are requested for your selected country.</p><label>Store region</label><select class="num" style="width:100%" onchange="setRegion(this.value)">${regions.map(r=>`<option value="${r[0]}" ${S.prefs.region===r[0]?'selected':''}>${r[2]} · ${r[1]}</option>`).join('')}</select><div class="settingrow"><span>Maximum price</span><input class="num" type="number" min="0" value="${S.prefs.maxPrice>=100?'':S.prefs.maxPrice}" placeholder="No limit" onchange="setPref('maxPrice',this.value===''?100:Number(this.value))"></div><div class="settingrow"><span>Free-to-play only</span><label class="switch"><input type="checkbox" ${S.prefs.freeOnly?'checked':''} onchange="setPref('freeOnly',this.checked)"><span></span></label></div></div>
  <div class="panel"><h3>Wishlist & notifications</h3><div class="settingrow"><span>Auto-watch sales</span><label class="switch"><input type="checkbox" ${S.prefs.autoWatchSale?'checked':''} onchange="setPref('autoWatchSale',this.checked)"><span></span></label></div><div class="settingrow"><span>Auto-watch updates</span><label class="switch"><input type="checkbox" ${S.prefs.autoWatchUpdate?'checked':''} onchange="setPref('autoWatchUpdate',this.checked)"><span></span></label></div><div class="settingrow"><span>Sale notifications</span><label class="switch"><input type="checkbox" ${S.prefs.notifySale?'checked':''} onchange="setPref('notifySale',this.checked)"><span></span></label></div><div class="settingrow"><span>Update notifications</span><label class="switch"><input type="checkbox" ${S.prefs.notifyUpdate?'checked':''} onchange="setPref('notifyUpdate',this.checked)"><span></span></label></div></div>
  <div class="panel"><h3>Reset</h3><p class="muted">Local settings, owned games, hidden games, ratings and browsing history are stored in this browser.</p><div class="actions"><button class="btn" onclick="resetTaste()">Reset recommendation taste</button><button class="btn" onclick="clearHistory()">Clear browsing history</button></div></div>
@@ -1042,7 +1040,7 @@ function discover(){
    return (b._searchScore||0)-(a._searchScore||0);
  });
  const filtered=sorted.filter(passesSearchReviewFilter);
- const top=filtered.slice(0,10);
+ const top=filtered.slice(0,S.displayCount);
  const hasQuery=!!S.q;
  const title=hasQuery?`Results for “${esc(S.q)}”`:(S.selectedGenres.length?`Matching your filters`:'Discover games');
  const subtitle=S.selectedGenres.length?`Every selected genre must match.`:'Search by title or combine genres to narrow the results.';
@@ -1101,8 +1099,8 @@ function closeScreenshot(){
 }
 function focusQ(){$('#q').focus()}
 function clearSearch(){S.q='';$('#q').value='';nav('discover')}
-function clearFilters(){S.selectedGenres=[];save();render()}
-function toggleGenre(g){S.selectedGenres=S.selectedGenres.includes(g)?S.selectedGenres.filter(x=>x!==g):[...S.selectedGenres,g];save();render();ensureGenres()}
+function clearFilters(){S.selectedGenres=[];S.displayCount=10;save();render()}
+function toggleGenre(g){S.selectedGenres=S.selectedGenres.includes(g)?S.selectedGenres.filter(x=>x!==g):[...S.selectedGenres,g];S.displayCount=10;save();render();ensureGenres()}
 function wish(id){
  const add=!S.wish.includes(id);
  if(add){S.wish=[...S.wish,id];if(S.prefs.autoWatchSale||S.prefs.autoWatchUpdate)S.watch[id]={sale:null,update:S.prefs.autoWatchUpdate,lastNews:null};toast('Added to wishlist')}
@@ -1123,14 +1121,14 @@ function setSearchPref(k,v){
 function setPref(k,v){S.prefs[k]=v;save();render()}
 function setRegion(v){S.prefs.region=v;S.details.clear();save();toast('Store region changed — refreshing prices');render();hydrate(S.apps.slice(0,30).map(a=>a.steam_app_id))}
 function togglePrefGenre(group,g){S.prefs[group]=S.prefs[group].includes(g)?S.prefs[group].filter(x=>x!==g):[...S.prefs[group],g];save();render()}
-function resetTaste(){S.prefs.preferredGenres=[];S.prefs.avoidGenres=[];S.prefs.maxPrice=100;S.prefs.minScore=0;S.prefs.minSteamPositive=0;S.prefs.hideBad=false;S.prefs.preferSingle=false;S.prefs.preferIndie=false;S.prefs.avoidEarly=false;S.prefs.freeOnly=false;save();render();toast('Recommendation settings reset')}
+function resetTaste(){S.prefs.preferredGenres=[];S.prefs.avoidGenres=[];S.prefs.maxPrice=100;S.prefs.minScore=0;S.prefs.minSteamPositive=0;S.prefs.minRecScore=0;S.prefs.minRecReviews=0;S.prefs.hideBad=false;S.prefs.preferSingle=false;S.prefs.preferIndie=false;S.prefs.avoidEarly=false;S.prefs.freeOnly=false;save();render();toast('Recommendation settings reset')}
 function clearHistory(){S.viewed=[];save();render();toast('Browsing history cleared')}
 function newList(){const n=prompt('List name:','My Games');if(!n)return;if(!S.lists[n])S.lists[n]=[];save();render()}
 function add(id){const names=Object.keys(S.lists);const n=prompt(names.length?`Add to which list? ${names.join(', ')}`:'Create a list first:','My Games');if(!n)return;if(!S.lists[n])S.lists[n]=[];if(!S.lists[n].includes(id))S.lists[n].push(id);save();toast('Added to list');}
 async function notifyPermission(){if(!('Notification'in window)){toast('Browser notifications are not supported here');return}const p=await Notification.requestPermission();toast(p==='granted'?'Browser alerts enabled':'Notification permission not granted')}
 async function check(){if(!Object.keys(S.watch).length)return;for(const id of Object.keys(S.watch)){const d=await info(+id),w=S.watch[id];if(!d)continue;const now=d.price_overview?.discount_percent||0;if(S.prefs.notifySale&&w.sale!==null&&now>w.sale&&Notification.permission==='granted')new Notification(d.name,{body:`Now ${now}% off on Steam.`});w.sale=now;const ns=await news(+id),newest=ns[0]?.gid||null;if(S.prefs.notifyUpdate&&w.lastNews&&newest&&newest!==w.lastNews&&Notification.permission==='granted')new Notification(d.name,{body:'New Steam update/news activity detected.'});if(newest)w.lastNews=newest}save()}
 let searchTimer;
-$('#q')?.addEventListener('input',e=>{S.q=e.target.value.trim();clearTimeout(searchTimer);searchTimer=setTimeout(()=>S.q?ensureSearch():render(),250)});
+$('#q')?.addEventListener('input',e=>{S.q=e.target.value.trim();S.displayCount=10;clearTimeout(searchTimer);searchTimer=setTimeout(()=>S.q?ensureSearch():render(),250)});
 document.addEventListener('click',e=>{
  const wishBtn=e.target.closest('[data-wish-id]');
  if(wishBtn){
