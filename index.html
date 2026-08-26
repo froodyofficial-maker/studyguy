@@ -253,6 +253,12 @@ const S={
   for(const k of ['hideBad','preferSingle','preferIndie','avoidEarly','freeOnly','notifySale','notifyUpdate','autoWatchSale','autoWatchUpdate','useSpecs']) S.prefs[k]=S.prefs[k]===true;
   if(!S.prefs.region) S.prefs.region='IN';
 })();
+// Normalize legacy preference fields from older GamerGuy versions.
+S.prefs.cpuModel=String(S.prefs.cpuModel||'');
+S.prefs.gpuModel=String(S.prefs.gpuModel||'');
+S.prefs.ramGB=Number(S.prefs.ramGB||16);
+S.prefs.vramGB=Number(S.prefs.vramGB||0);
+S.prefs.os=String(S.prefs.os||'Windows 11');
 function makeSessionId(){
   try{
     if(window.crypto?.randomUUID) return window.crypto.randomUUID();
@@ -1320,7 +1326,7 @@ function alerts(){const g=Object.keys(S.watch).map(Number).map(id=>S.map.get(id)
 function settings(){
  const G=['Action','Adventure','Casual','Co-op','Early Access','Free to Play','Horror','Indie','Multiplayer','RPG','Racing','Simulation','Single-player','Sports','Strategy','Survival','Survival Horror','Story Rich','Psychological Horror'];
  const regions=[['IN','INR','India'],['US','USD','United States'],['GB','GBP','United Kingdom'],['DE','EUR','Germany / Euro'],['CA','CAD','Canada'],['AU','AUD','Australia'],['JP','JPY','Japan']];
- const gpus=Object.entries(GPU_TIERS).map(([k,v])=>`<option value="${k}" ${Number(S.prefs.gpuTier)===Number(k)?'selected':''}>${v.name}</option>`).join('');
+ const gpus='';
  return `<section><div class="head"><div><h2>Settings</h2><p>Control recommendations, filters, prices, alerts and PC compatibility.</p></div></div><div class="settings">
  <div class="panel"><h3>Exact PC specs</h3><p class="muted">Enter the hardware actually in your PC. GamerGuy will compare it against each game's Steam requirements instead of guessing a broad performance class.</p>
    <div class="exact-spec">
