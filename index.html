@@ -1274,6 +1274,39 @@ function steamProfile(){
  <section class="section"><div class="head"><div><h2>Steam-based recommendations</h2><p>Refresh to get a new set based on your actual Steam library.</p></div></div><button class="btn primary" onclick="refreshRecommendations()">${ggIcon('arrow')} Refresh recommendations</button><div class="section"><div class="grid">${(S.recs||[]).map((a,i)=>card(a,i+1)).join('')||'<div class="empty">Click Refresh recommendations.</div>'}</div></div></section></section>`;
 }
 
+
+function compareAdd(id){
+ const n=Number(id);
+ if(!Number.isFinite(n)) return;
+ S.compare=[...S.compare.filter(x=>x!==n),n].slice(-3);
+ save();
+ toast('Added to compare');
+ nav('compare');
+}
+function compareRemove(id){
+ const n=Number(id);
+ S.compare=S.compare.filter(x=>x!==n);
+ save();
+ render();
+}
+async function shareCompare(){
+ const games=S.compare.map(id=>S.map.get(id)).filter(Boolean);
+ const text=games.length?`Check out my GamerGuy shortlist: ${games.map(x=>x.name).join(', ')}`:'Check out my GamerGuy shortlist on GamerGuy.';
+ const url=location.href;
+ if(navigator.share){
+   try{await navigator.share({title:'GamerGuy shortlist',text,url});return}catch{}
+ }
+ try{await navigator.clipboard.writeText(text+' '+url);toast('Shortlist copied to clipboard')}
+ catch{toast(text)}
+}
+function compare(){
+ const games=S.compare.map(id=>S.map.get(id)).filter(Boolean).slice(0,3);
+ const candidates=S.viewed.map(id=>S.map.get(id)).filter(Boolean).slice(-30).reverse();
+ return `<section><div class="head"><div><h2>Compare games</h2><p>Choose up to three games and send the shortlist to a friend.</p></div><button class="btn" onclick="shareCompare()">Share shortlist</button></div>
+ <div class="actions">${candidates.slice(0,10).map(a=>`<button class="chip ${S.compare.includes(a.steam_app_id)?'on':''}" onclick="compareAdd(${a.steam_app_id})">${esc(a.name)}</button>`).join('')}</div>
+ ${games.length?`<div class="comparegrid">${games.map(a=>{const d=detail(a.steam_app_id),x=scoreInfo(a),m=multiplayerInfo(d);return `<div class="panel"><h3>${esc(a.name)}</h3><div class="compareline"><span>GamerGuy</span><b>${x.combined10!==null?x.combined10.toFixed(1)+'/10':'—'}</b></div><div class="compareline"><span>Steam</span><b>${x.positive!==null?x.positive+'%':'—'}</b></div><div class="compareline"><span>Metacritic</span><b>${x.meta!==null?x.meta:'—'}</b></div><div class="compareline"><span>Price</span><b>${priceText(d)}</b></div><div class="compareline"><span>PC</span><b>${compatibility(d).label}</b></div><div class="compareline"><span>Multiplayer</span><b>${m.multiplayer?'Yes':'No'}</b></div><button class="btn" onclick="compareRemove(${a.steam_app_id})">Remove</button></div>`}).join('')}</div>`:'<div class="empty">Open a game and choose Compare to start a comparison.</div>'}</section>`;
+}
+
 function profile(){if(window.GG_PUBLIC_STEAM_ID)return publicProfile(window.GG_PUBLIC_STEAM_ID);if(S.steam)return steamProfile();const viewed=S.viewed.map(id=>S.map.get(id)).filter(Boolean),rated=Object.entries(S.ratings),genreCounts={};viewed.forEach(a=>ggGenres(a).forEach(g=>genreCounts[g]=(genreCounts[g]||0)+1));const favorite=Object.entries(genreCounts).sort((a,b)=>b[1]-a[1]).slice(0,6),avg=rated.length?(rated.reduce((n,x)=>n+Number(x[1]),0)/rated.length).toFixed(1):'—';return `<section><div class="head"><div><h2>Your GamerGuy profile</h2><p>Built from your browsing, saved taste and ratings on this browser.</p></div></div><div class="steam-card" style="margin-bottom:14px"><div class="steam-head"><div><h3 style="margin:0">Link Steam for a much smarter profile</h3><p class="muted" style="margin:6px 0 0">See your library, playtime, achievements, library value and Steam-powered recommendations.</p></div><button class="btn primary" onclick="linkSteam()">Sign in with Steam</button></div></div><div class="profilegrid"><div class="panel"><h3>Snapshot</h3><div class="profilebig">${avg}/5 <span>Your average rating</span></div><div class="compareline"><span>Games viewed</span><b>${viewed.length}</b></div><div class="compareline"><span>Wishlist</span><b>${S.wish.length}</b></div></div><div class="panel"><h3>Your taste</h3><div class="tastebars">${favorite.map(([g,n])=>`<div><div class="tastebarhead"><span>${esc(g)}</span><b>${n}</b></div><div class="tastebar"><i style="width:${Math.min(100,n*14)}%"></i></div></div>`).join('')||'<div class="muted">Browse more games to build your profile.</div>'}</div></div></div></section>`}
 function renderGame(
 a,d,rv,nw){
@@ -1691,4 +1724,3 @@ function preloadImages(ids){
   <img id="screenModalImage" alt="">
 </div>
 </body></html>
-
