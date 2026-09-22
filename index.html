@@ -1275,7 +1275,7 @@ function steamProfile(){
 }
 
 
-function compareAdd(id){
+var compareAdd = function(id){
  const n=Number(id);
  if(!Number.isFinite(n)) return;
  S.compare=[...S.compare.filter(x=>x!==n),n].slice(-3);
@@ -1283,13 +1283,13 @@ function compareAdd(id){
  toast('Added to compare');
  nav('compare');
 }
-function compareRemove(id){
+var compareRemove = function(id){
  const n=Number(id);
  S.compare=S.compare.filter(x=>x!==n);
  save();
  render();
-}
-async function shareCompare(){
+};
+var shareCompare = async function(){
  const games=S.compare.map(id=>S.map.get(id)).filter(Boolean);
  const text=games.length?`Check out my GamerGuy shortlist: ${games.map(x=>x.name).join(', ')}`:'Check out my GamerGuy shortlist on GamerGuy.';
  const url=location.href;
@@ -1298,7 +1298,7 @@ async function shareCompare(){
  }
  try{await navigator.clipboard.writeText(text+' '+url);toast('Shortlist copied to clipboard')}
  catch{toast(text)}
-}
+};
 function compare(){
  const games=S.compare.map(id=>S.map.get(id)).filter(Boolean).slice(0,3);
  const candidates=S.viewed.map(id=>S.map.get(id)).filter(Boolean).slice(-30).reverse();
@@ -1611,6 +1611,10 @@ const filtered=sorted.filter(passesSearchReviewFilter);
    <div class="bar"><span>${S.more?'More Steam games available':'End of the currently loaded catalog'}</span><button class="btn" onclick="loadMore()">${S.loading?'Loading…':'Load more'}</button></div>
  </section>`;
 }
+window.shareCompare = shareCompare;
+window.compareAdd = compareAdd;
+window.compareRemove = compareRemove;
+
 function render(){
  if(S.page==='game'){return}
  const html=S.page==='home'?home():S.page==='discover'?discover():S.page==='lists'?lists():S.page==='wishlist'?wishlist():S.page==='alerts'?alerts():S.page==='settings'?settings():S.page==='ai'?aiAdvisor():S.page==='deals'?deals():S.page==='gems'?gems():S.page==='compare'?compare():profile();
@@ -1724,3 +1728,4 @@ function preloadImages(ids){
   <img id="screenModalImage" alt="">
 </div>
 </body></html>
+
